@@ -1,9 +1,14 @@
-import speech_recognition as sr
+from gtts import gTTS
+import pygame
 
-r = sr.Recognizer()
+text="Hello Rasa Bot User! I am a Bot"
+tts = gTTS(text=text, lang="en")
+tts.save("temp.mp3") # save the audio in a temp file 
+pygame.mixer.init()
 
-harvard = sr.AudioFile('audio_files_harvard (2).wav')
-with harvard as source:
-    audio = r.record(source)
+pygame.mixer.music.load('temp.mp3')
+pygame.mixer.music.play()
 
-r.recognize_google(audio)
+
+#pygame.mixer.music.load('temp.mp3')# load the audio file
+#pygame.mixer.music.play()

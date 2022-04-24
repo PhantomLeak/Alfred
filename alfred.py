@@ -1,5 +1,4 @@
 from queue import Empty
-import pytssx3 as speak
 import alfred_logic as lg
 from datetime import datetime # Used to get current day of the week
 import calendar # Converts daytime number into day of the week
