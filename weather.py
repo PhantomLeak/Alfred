@@ -1,7 +1,7 @@
 from re import L
 from pyowm.owm import OWM
 
-owm = OWM('4ce782c4b5c4e9519db3771a595cc65b')
+owm = OWM('API KEY')
 naples_lon = 26.1420
 naples_lat = 81.7948
 
