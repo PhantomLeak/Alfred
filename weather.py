@@ -2,11 +2,11 @@ from re import L
 from pyowm.owm import OWM
 
 owm = OWM('API KEY')
-naples_lon = 26.1420
-naples_lat = 81.7948
+lon = 26.1420
+lat = 81.7948
 
 mgr = owm.weather_manager()
-observation = mgr.weather_at_coords(naples_lat, naples_lon)
+observation = mgr.weather_at_coords(lat, lon)
 w = observation.weather
 
 print(f"The overcast todya is going to be {w.detailed_status}")
