@@ -1,18 +1,21 @@
-import alfred_games as ag
-import alfred as af 
+from alfred_games import games
+import alfred as af
 import alfred_feelings as alf
 import web_search as ws
 import password_generator as pg
 
-#Completes the logic for Alfred
-def logic(i) : 
-    if ('game' in i) :
+alfredGames = games()
+
+
+# Completes the logic for Alfred
+def logic(i):
+    if ('game' in i):
         games = input("Which game would you like to play? (1. Rock Paper Scissors, 2. Guessing Game, 3. Quit):  ")
         print("")
         if games == '1' or 'rock' in games or 'paper' in games or 'scissors' in games:
-            ag.rock_paper_scissors()
+            alfredGames.rock_paper_scissors()
         elif games == '2' or 'guessing' in games:
-            ag.guessing_game()
+            alfredGames.guessing_game(10)
         else:
             print('GoodBye, come play again! \n')
             af.alfred_main(1)
@@ -28,8 +31,7 @@ def logic(i) :
     elif ('exit' or 'end' in i):
         print('I hope you have a great day!')
         exit()
-        
-    else : 
+
+    else:
         print("I'm sorry, I don't quite understand, can you try again? ")
         af.alfred_main(1)
-        
