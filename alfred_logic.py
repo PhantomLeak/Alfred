@@ -3,6 +3,7 @@ import alfred as af
 import alfred_feelings as alf
 import web_search as ws
 import password_generator as pg
+import alfred_jokes as aj
 
 alfredGames = games()
 
@@ -27,6 +28,18 @@ def logic(i):
     elif ('password' in i):
         pLen = int(input('How long does the password need to be? : '))
         pg.create_password(pLen)
+
+    elif ('joke' in i):
+        joke = aj.jokes()
+        print( '\n' + joke + '\n')
+        anotherJoke = input('Would you like to hear another?: ')
+        if anotherJoke.lower() =='y' or anotherJoke.lower() =='yes':
+            logic('joke')
+        if anotherJoke.lower() =='n' or anotherJoke.lower() =='no':
+            af.alfred_main(1)
+        else:
+            print("I don't quite understand...")
+            af.alfred_main(1) #TODO fild better solution for this...
 
     elif ('exit' or 'end' in i):
         print('I hope you have a great day!')

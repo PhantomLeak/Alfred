@@ -20,4 +20,5 @@ if __name__ == '__main__':
 
 #TODO Allow Alfred to do speech to text recognition so I can speak to him rather than typing (Kinda like Iron man and Jarvis)
 # May be an issue, pyaudio doesn't seem to want to work on windows machines, may need to install this on raspberryPi
-#TODO use an API for practice, maybe a weather API to get local weather forcasts? 
+#TODO use an API for practice, maybe a weather API to get local weather forcasts?
+## TODO Enable search with caps... basically make everthing lowercase by default
