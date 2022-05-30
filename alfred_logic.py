@@ -1,5 +1,6 @@
 from Games.alfred_games import games
 import alfred as af
+import tests as test
 import web_search as ws
 import password_generator as pg
 import alfred_jokes as aj
@@ -23,9 +24,8 @@ def logic(i):
             print('GoodBye, come play again! \n')
             af.alfred_main(1)
 
-    elif ('search' in i):
-        search_input = input("What would you like to search?: ")
-        ws.googlesearch(search_input)
+    elif ('?' in i):
+        ws.googlesearch(i)
 
     elif ('password' in i):
         pLen = int(input('How long does the password need to be? : '))
@@ -35,6 +35,10 @@ def logic(i):
         forecast = weather.weather()
         print(forecast + '\n')
         af.alfred_main(1)
+
+    elif (i == 'test'):
+        result = test.scrape_google('dogs')
+        print(result)
 
     elif ('joke' in i):
         joke = aj.jokes()

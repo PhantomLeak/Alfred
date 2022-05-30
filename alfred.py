@@ -23,3 +23,4 @@ if __name__ == '__main__':
 
 ###Todo: Create more games...maybe something like the snake game or hangman? come back to this...
 ###Todo: Allow weather API to take input from user to allow for a change in location
+###Todo: Update search to auto search if input in question
