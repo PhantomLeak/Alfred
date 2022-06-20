@@ -24,7 +24,7 @@ def logic(i):
             print('GoodBye, come play again! \n')
             af.alfred_main(1)
 
-    elif ('?' in i):
+    elif ('?' in i and 'how are you?' not in i):
         ws.googlesearch(i)
 
     elif ('password' in i):
@@ -52,10 +52,15 @@ def logic(i):
             print("I don't quite understand...")
             af.alfred_main(1) #TODO fild better solution for this...
 
-    elif ('exit' or 'end' in i):
+    elif i == 'end' or i == 'exit' or i == 'no':
         print('I hope you have a great day!')
         exit()
 
     else:
         print("I'm sorry, I don't quite understand, can you try again? ")
         af.alfred_main(1)
+
+
+
+def web_search_rules(search):
+    pass

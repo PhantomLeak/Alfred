@@ -21,7 +21,7 @@ class games():
             pass
     def play_again(self, mode):
         currentMode = mode
-        choice = input("Would you like to try again?: ")
+        choice = input("Would you like to try again? (y/n): ")
         if choice == "yes" or choice.lower() == 'y':
             if currentMode == 'rock_paper_scissors':
                 self.rock_paper_scissors()
@@ -38,6 +38,7 @@ class games():
         mode = 'rock_paper_scissors'
         comp = random.randint(1,3)
         typeValue = {1: 'Rock', 2: 'Paper', 3: 'Scissors'}
+        print('\n')
         user = int(input(f"choose your weapon (1: {typeValue[1]}, 2: {typeValue[2]}, 3: {typeValue[3]}, 4:Exit): "))
         if user == comp:
             print("Its a tie, try again \n")
@@ -56,6 +57,7 @@ class games():
         number = random.randint(1, highNumber)
         tries = 0
         win = False # setting a win flag to false
+        print('\n')
         print(f"I'm thinking of a number between 1 & {highNumber}")
         while not win:       # while the win is not true, run the while loop. We set win to false at the start therefore this will always run
             guess = int(input("Have a guess: "))

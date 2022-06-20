@@ -7,7 +7,7 @@ geolocator = Nominatim(user_agent="MyApp")
 
 def weather():
     get_location = input("Please Enter the city name and state ('Orlando, FL): ")
-    location = geolocator.geocode(get_location)
+    location = geolocator.geocode(get_location) # Attempt to generate weather data based on user location input...works but needs to be touched up still
 
     owm = OWM('4ce782c4b5c4e9519db3771a595cc65b')
     lon = location.longitude
