@@ -1,6 +1,6 @@
 from Games.alfred_games import games
 import alfred as af
-import tests as test
+# import tests as test
 import web_search as ws
 import password_generator as pg
 import alfred_jokes as aj
@@ -8,39 +8,70 @@ import weather as weather
 
 alfredGames = games()
 
+##Todo: Setup a db to hold question requests, answers, and possible initiators to allow alfred to learn.
+game_initiators = [
+    'i want to play a game',
+    'lets play a game',
+    "let's play a game",
+    'i want to play rock paper scissors',
+    'lets play rock paper scissors',
+    "Let's play rock paper scissors",
+    'lets play the guessing game',
+    "Let's play the guessing game",
+    'lets play guessing game',
+    "Let's play guessing game",
+]
+password_initiators = [
+    'i need a password',
+    'i need to make a password',
+    'make a password',
+    'create a password'
+]
+weather_initiators = [
+    'tell me the weather',
+    'what is the weather gonna be like',
+    'how will the weather be today',
+    'give me the forcast for today',
+    'tell me the weather forcast',
+    'weather forecast'
+]
+
+joke_initiators = [
+    'tell me a joke',
+    'can you tell me a joke',
+    'can you tell me a joke?',
+    'i want to hear something funny'
+]
 
 # Completes the logic for Alfred
 def logic(i):
-    if ('game' in i):
-        games = input("Which game would you like to play? (1. Rock Paper Scissors, 2. Guessing Game, 3.Sudoku 4. Quit):  ")
+    response = i.strip()
+    if response in game_initiators:
+        game_choice = input("Which game would you like to play? (1. Rock Paper Scissors, 2. Guessing Game, 3.Sudoku 4. Quit):  ")
         print("")
-        if games == '1' or 'rock' in games or 'paper' in games or 'scissors' in games:
+        if game_choice == '1' or 'rock' in game_choice or 'paper' in game_choice or 'scissors' in game_choice:
             alfredGames.gameDecision('rock_paper_scissors')
-        elif games == '2' or 'guessing' in games:
+        elif game_choice == '2' or 'guessing' in game_choice:
             alfredGames.gameDecision('guess_game')
-        elif games == '3' or 'sudoku' in games:
+        elif game_choice == '3' or 'sudoku' in game_choice:
             alfredGames.gameDecision('sudoku')
         else:
             print('GoodBye, come play again! \n')
             af.alfred_main(1)
 
-    elif ('?' in i and 'how are you?' not in i):
+    elif '?' in i and 'how are you?' not in i:
         ws.googlesearch(i)
 
-    elif ('password' in i):
-        pLen = int(input('How long does the password need to be? : '))
-        pg.create_password(pLen)
+    elif response in password_initiators:
+        password_length = int(input('How many characters does the password need to be? : '))
+        pg.create_password(password_length)
 
-    elif ('weather' in i):
+    elif response in weather_initiators:
         forecast = weather.weather()
         print(forecast + '\n')
         af.alfred_main(1)
 
-    elif (i == 'test'):
-        result = test.scrape_google('dogs')
-        print(result)
-
-    elif ('joke' in i):
+    elif response in joke_initiators:
         joke = aj.jokes()
         print( '\n' + '- ' + joke + '\n')
         anotherJoke = input('Would you like to hear another?: ')
@@ -57,10 +88,11 @@ def logic(i):
         exit()
 
     else:
+        user_input = ''
+        if i.strip == 'game':
+            user_input = input('Do you want to play a game?: ').lower()
+            if user_input == 'yes' or user_input == 'y':
+                logic("I want to play a game")
         print("I'm sorry, I don't quite understand, can you try again? ")
         af.alfred_main(1)
 
-
-
-def web_search_rules(search):
-    pass

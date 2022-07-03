@@ -4,7 +4,7 @@ import alfred as af
 
 mode = ''
 #Todo: Create more games...maybe something like the snake game or hangman? come back to this...
-##TODO: Randomly generate the sudoku board rather than the prebuilt one...
+##TODO: Randomly generate the sudoku board rather than the prebuilt one... Not liking the sudoku game idea anyways...move to remaking snake & maybe pong or space invaders...that could be fun.
 class games():
     def __init__(self):
         pass
@@ -14,11 +14,10 @@ class games():
             self.rock_paper_scissors()
         elif game == 'guessing_game':
             self.guessing_game(10)
-        elif game == 'sudoku':
-            import Games.sudoku_gui as SudokuGame
-            self.play_again('sudoku')
-
-            pass
+        # elif game == 'sudoku':
+        #     import Games.sudoku_gui as SudokuGame
+        #     self.play_again('sudoku')
+        #     pass
     def play_again(self, mode):
         currentMode = mode
         choice = input("Would you like to try again? (y/n): ")
