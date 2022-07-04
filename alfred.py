@@ -25,3 +25,4 @@ if __name__ == '__main__':
 
 ###Todo: Create more games...maybe something like the snake game or hangman? come back to this...
 ###Todo: Update search to auto search if input in question (Updated search for a more streamline approach but still need to nail down the process)
+###Todo: Look into phone connections and allowing alfred to send texts, emails, and make calls.

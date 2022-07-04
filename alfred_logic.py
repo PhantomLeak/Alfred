@@ -13,6 +13,7 @@ game_initiators = [
     'i want to play a game',
     'lets play a game',
     "let's play a game",
+    'i wanna play a game',
     'i want to play rock paper scissors',
     'lets play rock paper scissors',
     "Let's play rock paper scissors",
@@ -25,7 +26,8 @@ password_initiators = [
     'i need a password',
     'i need to make a password',
     'make a password',
-    'create a password'
+    'create a password',
+    'make me a password'
 ]
 weather_initiators = [
     'tell me the weather',
@@ -47,7 +49,7 @@ joke_initiators = [
 def logic(i):
     response = i.strip()
     if response in game_initiators:
-        game_choice = input("Which game would you like to play? (1. Rock Paper Scissors, 2. Guessing Game, 3.Sudoku 4. Quit):  ")
+        game_choice = input("Which game would you like to play? (1. Rock Paper Scissors, 2. Guessing Game, 3.Sudoku 4.Snake Game 5. Quit):  ")
         print("")
         if game_choice == '1' or 'rock' in game_choice or 'paper' in game_choice or 'scissors' in game_choice:
             alfredGames.gameDecision('rock_paper_scissors')
@@ -55,6 +57,8 @@ def logic(i):
             alfredGames.gameDecision('guess_game')
         elif game_choice == '3' or 'sudoku' in game_choice:
             alfredGames.gameDecision('sudoku')
+        elif game_choice == '4' or 'snake' in game_choice:
+            alfredGames.gameDecision('snake_game')
         else:
             print('GoodBye, come play again! \n')
             af.alfred_main(1)

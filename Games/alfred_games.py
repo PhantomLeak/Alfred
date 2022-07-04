@@ -1,5 +1,6 @@
 import random  
 import alfred as af
+from Games import snake_game as sg
 #from Games.sudoku_gui import Grid as SudokuGame
 
 mode = ''
@@ -14,6 +15,8 @@ class games():
             self.rock_paper_scissors()
         elif game == 'guessing_game':
             self.guessing_game(10)
+        elif game == 'snake_game':
+            self.snake_game()
         # elif game == 'sudoku':
         #     import Games.sudoku_gui as SudokuGame
         #     self.play_again('sudoku')
@@ -26,6 +29,8 @@ class games():
                 self.rock_paper_scissors()
             if currentMode == 'sudoku':
                 self.gameDecision('sudoku')
+            if currentMode == 'snake_game':
+                self.gameDecision('snake_game')
         elif choice == "no" or choice.lower() == 'n':
             print('\n Not a problem \n')
             af.alfred_main(1)
@@ -77,3 +82,7 @@ class games():
         elif next_level.lower() == "n":
             print("Well, I hope to see you soon!! \n")
             af.alfred_main(1)
+
+    def snake_game(self):
+        sg.run_game()
+        self.play_again('snake_game')
