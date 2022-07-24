@@ -5,6 +5,7 @@ import web_search as ws
 import password_generator as pg
 import alfred_jokes as aj
 import weather as weather
+import calculator as calculator
 
 alfredGames = games()
 
@@ -73,6 +74,11 @@ def logic(i):
     elif response in weather_initiators:
         forecast = weather.weather()
         print(forecast + '\n')
+        af.alfred_main(1)
+
+    elif '+' in response or '-' in response or '/' in response or '*' in response:
+        calc = calculator.string_num_seperator(response)
+        print(str(calc) + '\n')
         af.alfred_main(1)
 
     elif response in joke_initiators:
