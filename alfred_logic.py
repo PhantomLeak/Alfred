@@ -55,7 +55,7 @@ def logic(i):
         if game_choice == '1' or 'rock' in game_choice or 'paper' in game_choice or 'scissors' in game_choice:
             alfredGames.gameDecision('rock_paper_scissors')
         elif game_choice == '2' or 'guessing' in game_choice:
-            alfredGames.gameDecision('guess_game')
+            alfredGames.gameDecision('guessing_game')
         elif game_choice == '3' or 'sudoku' in game_choice:
             alfredGames.gameDecision('sudoku')
         elif game_choice == '4' or 'snake' in game_choice:

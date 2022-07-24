@@ -17,10 +17,6 @@ class games():
             self.guessing_game(10)
         elif game == 'snake_game':
             self.snake_game()
-        # elif game == 'sudoku':
-        #     import Games.sudoku_gui as SudokuGame
-        #     self.play_again('sudoku')
-        #     pass
     def play_again(self, mode):
         currentMode = mode
         choice = input("Would you like to try again? (y/n): ")
@@ -76,10 +72,10 @@ class games():
         print(f"That's Correct!! The number was {number} \n")
         print(f"it took you {tries} tries to get it correct \n")
 
-        next_level = input("Would you like to move to the next level?[Y/N]: ")
-        if next_level.lower() == "y":
+        next_level = input("Would you like to move to the next level?[Y/N]: ").lower()
+        if next_level == 'y' or next_level == 'yes':
             self.guessing_game(highNumber + 10)
-        elif next_level.lower() == "n":
+        elif next_level == 'n' or next_level == 'no':
             print("Well, I hope to see you soon!! \n")
             af.alfred_main(1)
 
