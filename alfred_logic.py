@@ -76,9 +76,9 @@ def logic(i):
         print(forecast + '\n')
         af.alfred_main(1)
 
-    elif '+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response:
+    elif '+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response or 'squared' in response or 'power of' in response:
         calc = calculator.string_num_seperator(response)
-        print(str(calc) + '\n')
+        print('The Answer is: '+ str(calc) + '\n')
         af.alfred_main(1)
 
     elif response in joke_initiators:
