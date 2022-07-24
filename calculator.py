@@ -1,29 +1,28 @@
 import math
+import re
 
-nums = []
+#TODO: Allow for calculations with multiple operators and more than two numbers, and power operators
 # Strip numbers out of string and determine calculation types
 def string_num_seperator(string):
-    global calc
-    for s in string:
-        if s.isdigit():
-            nums.append(s)
+    operator = None
+    # Regex check to find all numbers inside the string
+    nums = re.findall('[0-9]+', string)
     if 'plus' in string or '+' in string:
-        calc = calculations('+')
+        operator = '+'
     elif 'minus' in string or '-' in string:
-        calc = calculations('-')
+        operator = '-'
     elif 'times' in string or '*' in string:
-        calc = calculations('*')
+        operator = '*'
     elif 'division' in string or '/' in string:
-        calc = calculations('/')
-    elif 'square root' in string or 'sqrt' in string:
-        calc = calculations('sqrt')
+        operator = '/'
+    elif 'sqrt' in string or 'square root' in string:
+        operator = 'sqrt'
 
-    return calc
+    return calculations(operator, nums)
 
 #perform calculations and return answer
-def calculations(operator):
+def calculations(operator, nums):
     if operator == 'sqrt':
-        return math.sqrt(nums[0])
+        return math.sqrt(int(nums[0]))
     else:
         return eval('{}{}{}'.format(nums[0], operator, nums[1]))
-
