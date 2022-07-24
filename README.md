@@ -8,4 +8,4 @@ https://github.com/PhantomLeak/Alfred
 - Ask for weather information
 - Generate passwords
 - Tells jokes
-- Performes calculations (currently maximum of two numbers i.e x * y)
+- Performes calculations calculations (addition, subtraction, multiplicaion, division, square root, and powers) 
