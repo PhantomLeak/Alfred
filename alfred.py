@@ -1,15 +1,21 @@
 import alfred_logic as lg
+from terminal_colors import colors as terminal_message
 from datetime import datetime # Used to get current day of the week
 import calendar # Converts daytime number into day of the week
 
+tc = terminal_message()
+
 def alfred_main(i) : 
+
     if i is None:
         today = calendar.day_name[datetime.today().weekday()]
-        user_input = input(f'Hello sir, how can I help you on this fine {today}? : ').lower()
+
+        user_input = input(tc.prompt_message(f'Hello Sir, how can I help you on this fine {today}?:')).lower()
+
         lg.logic(user_input)
     else:
         today = calendar.day_name[datetime.today().weekday()]
-        user_input = input('Is there anything else I can help you with? : ').lower()
+        user_input = input(tc.prompt_message('Is there anything else I can help you with?:')).lower()
         lg.logic(user_input)
 
 # Allows other files to call method without looping error
@@ -17,7 +23,7 @@ if __name__ == '__main__':
     try:
         alfred_main(None)
     except KeyboardInterrupt: #Check for keyboard Interruptions...error seems to constantly show up when searching the web.
-        print('Interrupted')
+        print(tc.error_message('Interrupted'))
 
 
 #TODO Allow Alfred to do speech to text recognition so I can speak to him rather than typing (Kinda like Iron man and Jarvis)
