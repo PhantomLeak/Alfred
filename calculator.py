@@ -1,7 +1,6 @@
 import math
 import re
 
-#TODO: Allow for calculations with multiple operators and more than two numbers,and power operators
 # Strip numbers out of string and determine calculation types
 def string_num_seperator(string):
     nums = re.findall('[0-9]+', string)

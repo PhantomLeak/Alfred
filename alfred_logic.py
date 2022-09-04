@@ -1,4 +1,5 @@
 from Games.alfred_games import games
+from terminal_colors import colors as terminal_message
 import alfred as af
 # import tests as test
 import web_search as ws
@@ -8,6 +9,7 @@ import weather as weather
 import calculator as calculator
 
 alfredGames = games()
+tc = terminal_message()
 
 ##Todo: Setup a db to hold question requests, answers, and possible initiators to allow alfred to learn.
 game_initiators = [
@@ -50,7 +52,8 @@ joke_initiators = [
 def logic(i):
     response = i.strip()
     if response in game_initiators:
-        game_choice = input("Which game would you like to play? (1. Rock Paper Scissors, 2. Guessing Game, 3.Sudoku 4.Snake Game 5. Quit):  ")
+        # game_choice = input(tc.prompt_message("Which game would you like to play? (1. Rock Paper Scissors, 2. Guessing Game, 3.Sudoku 4.Snake Game 5. Quit):"))
+        game_choice = input(tc.prompt_message(f"Which game would you like to play? ({tc.prompt_message_choices('1.','Rock Paper Scissors,')}, {tc.prompt_message_choices('2.','Guessing Game,')}, {tc.prompt_message_choices('3.','Sudoku,')} {tc.prompt_message_choices('4.','Snake Game,')} {tc.prompt_message_choices('5.','Quit):')}"))
         print("")
         if game_choice == '1' or 'rock' in game_choice or 'paper' in game_choice or 'scissors' in game_choice:
             alfredGames.gameDecision('rock_paper_scissors')
@@ -61,14 +64,14 @@ def logic(i):
         elif game_choice == '4' or 'snake' in game_choice:
             alfredGames.gameDecision('snake_game')
         else:
-            print('GoodBye, come play again! \n')
+            print(tc.output_message('GoodBye, come play again!'))
             af.alfred_main(1)
 
     elif '?' in i and 'how are you?' not in i:
         ws.googlesearch(i)
 
     elif response in password_initiators:
-        password_length = int(input('How many characters does the password need to be? : '))
+        password_length = int(input(tc.prompt_message('How many characters does the password need to be? :')))
         pg.create_password(password_length)
 
     elif response in weather_initiators:
@@ -78,31 +81,31 @@ def logic(i):
 
     elif '+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response or 'squared' in response or 'power of' in response:
         calc = calculator.string_num_seperator(response)
-        print('The Answer is: '+ str(calc) + '\n')
+        print(tc.output_message('The Answer is: '+ str(calc) + '\n'))
         af.alfred_main(1)
 
     elif response in joke_initiators:
         joke = aj.jokes()
-        print( '\n' + '- ' + joke + '\n')
-        anotherJoke = input('Would you like to hear another?: ')
+        print(tc.output_message('\n' + '- ' + joke + '\n'))
+        anotherJoke = input(tc.prompt_message('Would you like to hear another?:'))
         if anotherJoke.lower() =='y' or anotherJoke.lower() =='yes':
             logic('joke')
         if anotherJoke.lower() =='n' or anotherJoke.lower() =='no':
             af.alfred_main(1)
         else:
-            print("I don't quite understand...")
+            print(tc.error_message("I don't quite understand..."))
             af.alfred_main(1) #TODO fild better solution for this...
 
     elif i == 'end' or i == 'exit' or i == 'no':
-        print('I hope you have a great day!')
+        print(tc.output_message('I hope you have a great day!'))
         exit()
 
     else:
         user_input = ''
         if i.strip == 'game':
-            user_input = input('Do you want to play a game?: ').lower()
+            user_input = input(tc.prompt_message('Do you want to play a game?:')).lower()
             if user_input == 'yes' or user_input == 'y':
                 logic("I want to play a game")
-        print("I'm sorry, I don't quite understand, can you try again? ")
+        print(tc.error_message("I'm sorry, I don't quite understand, can you try again? "))
         af.alfred_main(1)
 
