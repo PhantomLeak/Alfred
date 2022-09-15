@@ -7,6 +7,7 @@ import password_generator as pg
 import alfred_jokes as aj
 import weather as weather
 import calculator as calculator
+import clear_temp_data as ctd
 
 alfredGames = games()
 tc = terminal_message()
@@ -48,6 +49,12 @@ joke_initiators = [
     'i want to hear something funny'
 ]
 
+local_storage_iniators = [
+    'clear local storage',
+    'clear cache',
+    'clean computer'
+]
+
 # Completes the logic for Alfred
 def logic(i):
     response = i.strip()
@@ -76,7 +83,11 @@ def logic(i):
 
     elif response in weather_initiators:
         forecast = weather.weather()
-        print(forecast + '\n')
+        print(tc.output_message(forecast))
+        af.alfred_main(1)
+
+    elif response in local_storage_iniators:
+        ctd.clear_local_files()
         af.alfred_main(1)
 
     elif '+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response or 'squared' in response or 'power of' in response:
