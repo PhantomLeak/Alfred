@@ -2,7 +2,7 @@ from Games.alfred_games import games
 from terminal_colors import colors as terminal_message
 import alfred as af
 # import tests as test
-import web_search as ws
+# import web_search as ws
 import password_generator as pg
 import alfred_jokes as aj
 import weather as weather
@@ -12,7 +12,7 @@ import clear_temp_data as ctd
 alfredGames = games()
 tc = terminal_message()
 
-##Todo: Setup a db to hold question requests, answers, and possible initiators to allow alfred to learn.
+#TODO: Setup a db to hold question requests, answers, and possible initiators to allow alfred to learn.
 game_initiators = [
     'i want to play a game',
     'lets play a game',
@@ -43,6 +43,7 @@ weather_initiators = [
 ]
 
 joke_initiators = [
+    'joke',
     'tell me a joke',
     'can you tell me a joke',
     'can you tell me a joke?',
@@ -59,7 +60,6 @@ local_storage_iniators = [
 def logic(i):
     response = i.strip()
     if response in game_initiators:
-        # game_choice = input(tc.prompt_message("Which game would you like to play? (1. Rock Paper Scissors, 2. Guessing Game, 3.Sudoku 4.Snake Game 5. Quit):"))
         game_choice = input(tc.prompt_message(f"Which game would you like to play? ({tc.prompt_message_choices('1.','Rock Paper Scissors,')}, {tc.prompt_message_choices('2.','Guessing Game,')}, {tc.prompt_message_choices('3.','Sudoku,')} {tc.prompt_message_choices('4.','Snake Game,')} {tc.prompt_message_choices('5.','Quit):')}"))
         print("")
         if game_choice == '1' or 'rock' in game_choice or 'paper' in game_choice or 'scissors' in game_choice:
@@ -74,8 +74,8 @@ def logic(i):
             print(tc.output_message('GoodBye, come play again!'))
             af.alfred_main(1)
 
-    elif '?' in i and 'how are you?' not in i:
-        ws.googlesearch(i)
+    # elif '?' in i and 'how are you?' not in i:
+    #     ws.googlesearch(i)
 
     elif response in password_initiators:
         password_length = int(input(tc.prompt_message('How many characters does the password need to be? :')))
@@ -99,13 +99,14 @@ def logic(i):
         joke = aj.jokes()
         print(tc.output_message('\n' + '- ' + joke + '\n'))
         anotherJoke = input(tc.prompt_message('Would you like to hear another?:'))
-        if anotherJoke.lower() =='y' or anotherJoke.lower() =='yes':
+        
+        if anotherJoke.lower() == 'y' or anotherJoke.lower() == 'yes':
             logic('joke')
-        if anotherJoke.lower() =='n' or anotherJoke.lower() =='no':
+        if anotherJoke.lower() == 'n' or anotherJoke.lower() == 'no':
             af.alfred_main(1)
         else:
             print(tc.error_message("I don't quite understand..."))
-            af.alfred_main(1) #TODO fild better solution for this...
+            af.alfred_main(1)
 
     elif i == 'end' or i == 'exit' or i == 'no':
         print(tc.output_message('I hope you have a great day!'))
