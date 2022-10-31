@@ -1,7 +1,6 @@
 import pyjokes
 from joke.jokes import *
 from random import choice
-#Todo: Generate a randomizer to get different categories of jokes rather than just programming ones.
 
 def jokes():
     joke_choice_one = pyjokes.get_joke(language='en', category='all')
