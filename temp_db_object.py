@@ -12,6 +12,7 @@ game_initiators = [
     'lets play guessing game',
     "Let's play guessing game",
 ]
+
 password_initiators = [
     'i need a password',
     'i need to make a password',
@@ -19,6 +20,7 @@ password_initiators = [
     'create a password',
     'make me a password'
 ]
+
 weather_initiators = [
     'tell me the weather',
     'what is the weather gonna be like',
