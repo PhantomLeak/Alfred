@@ -9,3 +9,6 @@ https://github.com/PhantomLeak/Alfred
 - Generate passwords
 - Tells jokes
 - Performes calculations calculations (addition, subtraction, multiplicaion, division, square root, and powers) 
+
+
+![Alfred](https://static.wikia.nocookie.net/earth279527/images/a/ad/Alfred_Pennyworth.jpg)
