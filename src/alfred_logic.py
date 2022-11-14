@@ -7,6 +7,7 @@ import functions.weather as weather
 import functions.calculator as calculator
 import functions.clear_temp_data as ctd
 import assets.temp_db_object as tbo
+import re
 # import tests as test
 # import web_search as ws
 
@@ -16,6 +17,7 @@ tc = terminal_message()
 # Completes the logic for Alfred
 def logic(i):
     response = i.strip()
+    
     if response in tbo.game_initiators:
         game_choice = input(tc.prompt_message(f"Which game would you like to play? ({tc.prompt_message_choices('1.','Rock Paper Scissors,')}, {tc.prompt_message_choices('2.','Guessing Game,')}, {tc.prompt_message_choices('3.','Sudoku,')} {tc.prompt_message_choices('4.','Snake Game,')} {tc.prompt_message_choices('5.','Quit):')}"))
         print("")
@@ -47,7 +49,8 @@ def logic(i):
         ctd.clear_local_files()
         af.alfred_main(1)
 
-    elif '+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response or 'squared' in response or 'power of' in response:
+    elif ('+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response 
+        or 'squared' in response or 'power of' in response):
         calc = calculator.string_num_seperator(response)
         print(tc.output_message('The Answer is: '+ str(calc) + '\n'))
         af.alfred_main(1)

@@ -13,7 +13,6 @@ def alfred_main(i) :
 
         lg.logic(user_input)
     else:
-        today = calendar.day_name[datetime.today().weekday()]
         user_input = input(tc.prompt_message('Is there anything else I can help you with?:')).lower()
         lg.logic(user_input)
 
@@ -26,6 +25,7 @@ if __name__ == '__main__':
 
 #TODO Allow Alfred to do speech to text recognition so I can speak to him rather than typing (Kinda like Iron man and Jarvis)
 # May be an issue, pyaudio doesn't seem to want to work on windows machines, may need to install this on raspberryPi
+#TODO Allow Alfred to set reminders / write to Google Calendar...
 
 ##TODO: Update search to auto search if input in question (Updated search for a more streamline approach but still need to nail down the process)
 ##TODO: Fix logic to handle a standard conversation (How are you?) and hold a conversation...

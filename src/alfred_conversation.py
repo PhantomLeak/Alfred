@@ -1,9 +1,6 @@
 
 
-from urllib import response
-
-
-class conversation():
+class conversation(): # Not sure how useful this will truly be...
     def __init__(self):
         pass
 
