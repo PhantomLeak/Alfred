@@ -49,3 +49,8 @@ conversation = [
     'how are you doing today',
     'i wanna talk'
 ]
+
+reminders_iniator = [
+    'set a reminder',
+    'set reminder'
+]

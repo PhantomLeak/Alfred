@@ -6,11 +6,14 @@ import functions.alfred_jokes as aj
 import functions.weather as weather
 import functions.calculator as calculator
 import functions.clear_temp_data as ctd
+import functions.reminders as reminders
 import assets.temp_db_object as tbo
+
 import re
 # import tests as test
 # import web_search as ws
 
+# Class initializitions 
 alfredGames = games()
 tc = terminal_message()
 
@@ -67,6 +70,10 @@ def logic(i):
         else:
             print(tc.error_message("I don't quite understand..."))
             af.alfred_main(1)
+    
+    elif response in tbo.reminders_iniator:
+        reminders.set_reminder()
+        af.alfred_main(1)
 
     elif i == 'end' or i == 'exit' or i == 'no':
         print(tc.output_message('I hope you have a great day!'))

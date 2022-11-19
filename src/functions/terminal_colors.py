@@ -60,4 +60,12 @@ class colors:
             self.logger(e)
 
         return message
+
+    def reminder_message(self, message):
+        try:
+            message = f'\n---------------\n{self.pref}{self.yellow}Reminder: {message}{self.reset}\n---------------\n'
+        except Exception as e:
+            self.logger(e)
+        
+        return message
     
