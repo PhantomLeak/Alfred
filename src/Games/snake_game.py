@@ -16,7 +16,7 @@ def run_game():
     wn.bgcolor('black')
 
     #Setting the width & height of the screen...can be edited by user
-    wn.setup(width=600, height=600)
+    wn.setup(width=800, height=800)
     wn.tracer(0)
 
     #Creating the initial one block (head) of the 'snake'
@@ -114,7 +114,7 @@ def run_game():
             if score > high_score:
                 high_score = score
             pen.clear()
-            pen.write(f"Score: {score} High Score: {high_score}", align="center", font=('candara', 24,'bold'))
+            pen.write(f"Score: {score} High Score: {high_score}", align="center", font=('candara', 18,'bold'))
             # Checking for head collisions with body segments
         for index in range(len(segments) - 1, 0, -1):
             x = segments[index - 1].xcor()
@@ -137,7 +137,7 @@ def run_game():
                 score = 0
                 delay = 0.1
                 pen.clear()
-                pen.write(f"Score: {score} High Score: {high_score}", align="center", font=('candara', 24,'bold'))
+                pen.write(f"Score: {score} High Score: {high_score}", align="center", font=('candara', 18,'bold'))
         time.sleep(delay)
 
 

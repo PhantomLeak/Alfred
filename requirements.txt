@@ -8,6 +8,7 @@ blinker==1.4
 bs4==0.0.1
 certifi==2022.5.18.1
 chardet==3.0.4
+chime==0.5.3
 Click==7.0
 geopy==2.2.0
 pyowm==3.3.0

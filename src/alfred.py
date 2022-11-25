@@ -8,7 +8,7 @@ tc = terminal_message()
 def alfred_main(i) : 
     if i is None:
         today = calendar.day_name[datetime.today().weekday()]
-
+        
         user_input = input(tc.prompt_message(f'Hello Sir, how can I help you on this fine {today}?:')).lower()
         lg.logic(user_input)
 

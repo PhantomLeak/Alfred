@@ -71,8 +71,8 @@ def logic(i):
             print(tc.error_message("I don't quite understand..."))
             af.alfred_main(1)
     
-    elif response in tbo.reminders_iniator:
-        reminders.set_reminder()
+    elif 'set a reminder' in response or 'remind me' in response:
+        reminders.set_reminder(response)
         af.alfred_main(1)
 
     elif i == 'end' or i == 'exit' or i == 'no':
