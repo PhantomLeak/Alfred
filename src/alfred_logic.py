@@ -8,21 +8,20 @@ import functions.calculator as calculator
 import functions.clear_temp_data as ctd
 import functions.reminders as reminders
 import assets.temp_db_object as tbo
-
-import re
-# import tests as test
-# import web_search as ws
+import functions.web_search as web_search
 
 # Class initializitions 
 alfredGames = games()
 tc = terminal_message()
 
+
 # Completes the logic for Alfred
 def logic(i):
     response = i.strip()
-    
+
     if response in tbo.game_initiators:
-        game_choice = input(tc.prompt_message(f"Which game would you like to play? ({tc.prompt_message_choices('1.','Rock Paper Scissors,')}, {tc.prompt_message_choices('2.','Guessing Game,')}, {tc.prompt_message_choices('3.','Sudoku,')} {tc.prompt_message_choices('4.','Snake Game,')} {tc.prompt_message_choices('5.','Quit):')}"))
+        game_choice = input(tc.prompt_message(
+            f"Which game would you like to play? ({tc.prompt_message_choices('1.', 'Rock Paper Scissors,')}, {tc.prompt_message_choices('2.', 'Guessing Game,')}, {tc.prompt_message_choices('3.', 'Sudoku,')} {tc.prompt_message_choices('4.', 'Snake Game,')} {tc.prompt_message_choices('5.', 'Quit):')}"))
         print("")
         if game_choice == '1' or 'rock' in game_choice or 'paper' in game_choice or 'scissors' in game_choice:
             alfredGames.gameDecision('rock_paper_scissors')
@@ -52,17 +51,17 @@ def logic(i):
         ctd.clear_local_files()
         af.alfred_main(1)
 
-    elif ('+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response 
-        or 'squared' in response or 'power of' in response):
+    elif ('+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response
+          or 'squared' in response or 'power of' in response):
         calc = calculator.string_num_seperator(response)
-        print(tc.output_message('The Answer is: '+ str(calc) + '\n'))
+        print(tc.output_message('The Answer is: ' + str(calc) + '\n'))
         af.alfred_main(1)
 
     elif response in tbo.joke_initiators:
         joke = aj.jokes()
         print(tc.output_message('\n' + '- ' + joke + '\n'))
         anotherJoke = input(tc.prompt_message('Would you like to hear another?:'))
-        
+
         if anotherJoke.lower() == 'y' or anotherJoke.lower() == 'yes':
             logic('joke')
         if anotherJoke.lower() == 'n' or anotherJoke.lower() == 'no':
@@ -70,10 +69,22 @@ def logic(i):
         else:
             print(tc.error_message("I don't quite understand..."))
             af.alfred_main(1)
-    
+
+    elif 'open' in response:
+        success = web_search.search_web(response)
+
+        print(tc.output_message(success))
+        af.alfred_main(1)
+
     elif 'set a reminder' in response or 'remind me' in response:
         reminders.set_reminder(response)
         af.alfred_main(1)
+
+    elif response == 'help':
+        print("Here are some of the commands I can help you with: ")
+
+        for idx, commands in enumerate(tbo.help_options):
+            print(tc.output_message(f"{idx}. {commands}"))
 
     elif i == 'end' or i == 'exit' or i == 'no':
         print(tc.output_message('I hope you have a great day!'))

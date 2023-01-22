@@ -1,4 +1,4 @@
-#TODO: Setup a db to hold question requests, answers, and possible initiators to allow alfred to learn.
+# TODO: Setup a db to hold question requests, answers, and possible initiators to allow alfred to learn.
 game_initiators = [
     'i want to play a game',
     'lets play a game',
@@ -53,4 +53,11 @@ conversation = [
 reminders_iniator = [
     'set a reminder',
     'set reminder'
+]
+
+help_options = [
+    "generate a password",
+    "Perform Calculations",
+    "Display / Show the weather",
+    "Set a reminder",
 ]
