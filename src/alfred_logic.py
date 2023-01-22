@@ -70,7 +70,7 @@ def logic(i):
             print(tc.error_message("I don't quite understand..."))
             af.alfred_main(1)
 
-    elif 'open' in response:
+    elif 'open' in response or 'search for' in response:
         success = web_search.search_web(response)
 
         print(tc.output_message(success))
