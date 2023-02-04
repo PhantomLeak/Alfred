@@ -1,6 +1,5 @@
 # Alfred2.0
-OOP / more advanced version of previous chatbot <br>
-https://github.com/PhantomLeak/Alfred
+Terminal based virtual assistant to help with every day needs and to have a converastion with
 
 ## Features
 - Ability to play limited games against computer
