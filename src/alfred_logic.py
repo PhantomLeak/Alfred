@@ -1,7 +1,7 @@
 from Games.alfred_games import games
 from functions.terminal_colors import colors as terminal_message
+from functions.password_generator import Password as Password
 import alfred as af
-import functions.password_generator as pg
 import functions.alfred_jokes as aj
 import functions.weather as weather
 import functions.calculator as calculator
@@ -13,6 +13,7 @@ import functions.web_search as web_search
 # Class initializitions 
 alfredGames = games()
 tc = terminal_message()
+password = Password()
 
 
 # Completes the logic for Alfred
@@ -39,8 +40,10 @@ def logic(i):
     #     ws.googlesearch(i)
 
     elif response in tbo.password_initiators:
-        password_length = int(input(tc.prompt_message('How many characters does the password need to be? :')))
-        pg.create_password(password_length)
+        new_password = password.create_password()
+
+        print(tc.output_with_return_message('Your new password is:', new_password))
+        af.alfred_main(1)
 
     elif response in tbo.weather_initiators:
         forecast = weather.weather()
@@ -85,13 +88,13 @@ def logic(i):
 
         for idx, commands in enumerate(tbo.help_options):
             print(tc.output_message(f"{idx}. {commands}"))
+        af.alfred_main(1)
 
     elif i == 'end' or i == 'exit' or i == 'no':
         print(tc.output_message('I hope you have a great day!'))
         exit()
 
     else:
-        user_input = ''
         if i.strip == 'game':
             user_input = input(tc.prompt_message('Do you want to play a game?:')).lower()
             if user_input == 'yes' or user_input == 'y':

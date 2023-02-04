@@ -23,12 +23,11 @@ if __name__ == '__main__':
         print(tc.error_message('Interrupted'))
 
 
-#TODO Allow Alfred to do speech to text recognition so I can speak to him rather than typing (Kinda like Iron man and Jarvis)
+#TODO: Allow Alfred to do speech to text recognition so I can speak to him rather than typing (Kinda like Iron man and Jarvis)
 
-#TODO Allow Alfred to set reminders / write to Google Calendar...
-#TODO Create User classes to allow for individual profiles
+#TODO: Allow Alfred to set reminders / write to Google Calendar...
+#TODO: Create User classes to allow for individual profiles
 
-##TODO: Update search to auto search if input in question (Updated search for a more streamline approach but still need to nail down the process)
-##TODO: Create a font-end for Alfred, maybe using flask or Javascript? 
+##TODO:: Create a font-end for Alfred, maybe using flask or Javascript? 
 
-###TODO: Clean up weather inputs...Response works but the temperature comes back with odd numbers
+###TODO:: Clean up weather inputs...Response works but the temperature comes back with odd numbers

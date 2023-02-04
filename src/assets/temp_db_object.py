@@ -60,4 +60,5 @@ help_options = [
     "Perform Calculations",
     "Display / Show the weather",
     "Set a reminder",
+    "search the web"
 ]
