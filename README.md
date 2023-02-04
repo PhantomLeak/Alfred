@@ -1,4 +1,4 @@
-# Alfred2.0
+# Alfred
 Terminal based virtual assistant to help with every day needs and to have a converastion with
 
 ## Features
