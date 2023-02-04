@@ -16,7 +16,7 @@ def set_reminder(reminder):
     reminder_time = set_reminder_time(float(time_digit), after_keyword)
     reminder_message = get_reminder_message(before_keyword, after_keyword)
     
-    # Timer(reminder_time, alert, args=[reminder_message]).start()
+    Timer(reminder_time, alert, args=[reminder_message]).start()
 
 
 # Set the specified time the user wishes to be reminded in 

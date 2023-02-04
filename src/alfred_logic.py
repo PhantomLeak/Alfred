@@ -36,9 +36,6 @@ def logic(i):
             print(tc.output_message('GoodBye, come play again!'))
             af.alfred_main(1)
 
-    # elif '?' in i and 'how are you?' not in i:
-    #     ws.googlesearch(i)
-
     elif response in tbo.password_initiators:
         new_password = password.create_password()
 
