@@ -9,6 +9,7 @@ import functions.clear_temp_data as ctd
 import functions.reminders as reminders
 import assets.temp_db_object as tbo
 import functions.web_search as web_search
+import os
 
 # Class initializitions 
 alfredGames = games()
@@ -78,6 +79,10 @@ def logic(i):
 
     elif 'set a reminder' in response or 'remind me' in response:
         reminders.set_reminder(response)
+        af.alfred_main(1)
+
+    elif response == 'clear':
+        os.system('cls' if os.name == 'nt' else 'clear')
         af.alfred_main(1)
 
     elif response == 'help':
