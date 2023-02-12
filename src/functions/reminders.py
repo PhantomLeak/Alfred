@@ -2,10 +2,9 @@ import chime
 import re
 from threading import Timer
 from functions.terminal_colors import colors as terminal_message
-from datetime import datetime
+from tkinter import messagebox
 
 tc = terminal_message()
-
 
 def set_reminder(reminder):
     # Use positive lookbehind to get the next word after 'in'
@@ -74,5 +73,8 @@ def get_reminder_message(before, after):
 
 # Chime and display alert once the specified timespan has finished
 def alert(reminder_message):
-    chime.info()
-    print(tc.reminder_message(reminder_message))
+    try:
+        chime.info()
+        messagebox.showinfo("Reminder", reminder_message)
+    except Exception as e:
+        print(str(e))
