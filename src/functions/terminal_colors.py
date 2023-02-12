@@ -27,7 +27,7 @@ class colors:
         return message
 
     def prompt_message_choices(self, number: int, option: str):
-        message = f'{self.pref}{self.yellow}{number}{self.reset}{self.pref}{self.green}{option}{self.reset} '
+        message = f'{self.pref}{self.yellow}{number}. {self.reset}{self.pref}{self.green}{option}{self.reset} '
 
         return message
 

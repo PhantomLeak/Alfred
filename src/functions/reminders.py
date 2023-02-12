@@ -3,20 +3,24 @@ import re
 from threading import Timer
 from functions.terminal_colors import colors as terminal_message
 from tkinter import messagebox
+import logging
 
 tc = terminal_message()
 
 def set_reminder(reminder):
-    # Use positive lookbehind to get the next word after 'in'
-    time_digit = re.search('(?<=in )(\w+)', reminder).group(1)  # Get the first parenthesised subgroup from regex search
+    try:
+        # Use positive lookbehind to get the next word after 'in'
+        time_digit = re.search('(?<=in )(\w+)', reminder).group(1)  # Get the first parenthesised subgroup from regex search
 
-    before_keyword, keyword, after_keyword = reminder.partition(time_digit)
+        before_keyword, keyword, after_keyword = reminder.partition(time_digit)
 
-    reminder_time = set_reminder_time(float(time_digit), after_keyword)
+        reminder_time = set_reminder_time(float(time_digit), after_keyword)
 
-    reminder_message = get_reminder_message(before_keyword, after_keyword)
+        reminder_message = get_reminder_message(before_keyword, after_keyword)
 
-    Timer(reminder_time, alert, args=[reminder_message]).start()
+        Timer(reminder_time, alert, args=[reminder_message]).start()
+    except Exception as e:
+        logging.exception(e)
 
 
 # Set the specified time the user wishes to be reminded in 
@@ -77,4 +81,4 @@ def alert(reminder_message):
         chime.info()
         messagebox.showinfo("Reminder", reminder_message)
     except Exception as e:
-        print(str(e))
+        logging.exception(e)

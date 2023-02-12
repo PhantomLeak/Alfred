@@ -1,5 +1,7 @@
 import webbrowser
 from urllib.parse import quote
+import logging
+
 
 def search_web(search_request: str = None):
     success_message = 'Search Was Successful'
@@ -8,7 +10,7 @@ def search_web(search_request: str = None):
         url = create_search_url(search_request)
         webbrowser.open(url)
     except Exception as e:
-        print(str(e))
+        logging.exception(e)
         success_message = 'Search Was Unsuccessful'
 
     return success_message

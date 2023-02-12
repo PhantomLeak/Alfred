@@ -1,6 +1,7 @@
 import pyjokes
 import requests
 import json
+import logging
 # from joke.jokes import *
 from random import choice
 
@@ -15,7 +16,7 @@ def jokes():
         choices = [joke_choice_one, joke_choice_two]
 
     except Exception as e:
-        print(str(e))
+        logging.exception(e)
 
     return choice(choices)
 
