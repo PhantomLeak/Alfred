@@ -5,17 +5,16 @@ import calendar  # Converts daytime number into day of the week
 
 tc = terminal_message()
 
-
 def alfred_main(i):
     if i is None:
         today = calendar.day_name[datetime.today().weekday()]
 
         user_input = input(tc.prompt_message(f'Hello Sir, how can I help you on this fine {today}?:')).lower()
-        lg.logic(user_input)
+        lg.logic(user_input.strip())
 
     else:
         user_input = input(tc.prompt_message('Is there anything else I can help you with?:')).lower()
-        lg.logic(user_input)
+        lg.logic(user_input.strip())
 
 
 if __name__ == '__main__':

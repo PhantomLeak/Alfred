@@ -43,8 +43,8 @@ def logic(i):
             print(tc.output_with_return_message('Your new password is:', new_password))
             af.alfred_main(1)
 
-        elif response in tbo.weather_initiators:
-            forecast = weather.weather()
+        elif 'weather' in response.lower():
+            forecast = weather.weather(response)
             print(tc.output_message(forecast))
             af.alfred_main(1)
 
