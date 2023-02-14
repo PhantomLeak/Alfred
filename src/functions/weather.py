@@ -2,7 +2,6 @@ from geopy.geocoders import Nominatim
 import requests
 import json
 import logging
-import re
 from src.api_keys import OPEN_WEATHER_API_KEY
 
 # Initialize Nominatim API
