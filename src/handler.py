@@ -1,4 +1,4 @@
-from Games.alfred_games import games
+from functions.Games.alfred_games import Games
 from functions.terminal_colors import colors as terminal_message
 from functions.password_generator import Password as Password
 import alfred as af
@@ -13,7 +13,7 @@ import logging
 import os
 
 # Class initialization
-alfredGames = games()
+alfredGames = Games()
 tc = terminal_message()
 password = Password()
 

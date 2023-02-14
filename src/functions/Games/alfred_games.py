@@ -1,6 +1,6 @@
 import random  
 import alfred as af
-from Games import snake_game as sg
+from functions.Games import snake_game as sg
 from functions.terminal_colors import colors as terminal_message
 #from Games.sudoku_gui import Grid as SudokuGame
 
@@ -9,7 +9,7 @@ tc = terminal_message()
 mode = ''
 #Todo: Create more games...maybe something like the snake game or hangman? come back to this...
 ##TODO: Randomly generate the sudoku board rather than the prebuilt one... Not liking the sudoku game idea anyways...move to remaking snake & maybe pong or space invaders...that could be fun.
-class games():
+class Games():
     def __init__(self):
         pass
 
@@ -21,22 +21,22 @@ class games():
         elif game == 'snake_game':
             self.snake_game()
 
-    def play_again(self, mode):
-        currentMode = mode
+    def play_again(self, game_mode):
+        current_mode = game_mode
         choice = input(tc.prompt_message("Would you like to try again? (y/n):"))
         if choice == "yes" or choice.lower() == 'y':
-            if currentMode == 'rock_paper_scissors':
+            if current_mode == 'rock_paper_scissors':
                 self.rock_paper_scissors()
-            if currentMode == 'sudoku':
+            if current_mode == 'sudoku':
                 self.gameDecision('sudoku')
-            if currentMode == 'snake_game':
+            if current_mode == 'snake_game':
                 self.gameDecision('snake_game')
         elif choice == "no" or choice.lower() == 'n':
             print(tc.output_message('Not a problem'))
             af.alfred_main(1)
         else:
             print(tc.error_message("I don't quite understand...please try that again"))
-            self.play_again(currentMode)
+            self.play_again(current_mode)
 
     def rock_paper_scissors(self):
         mode = 'rock_paper_scissors'

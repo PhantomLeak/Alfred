@@ -2,7 +2,6 @@ import pyjokes
 import requests
 import json
 import logging
-# from joke.jokes import *
 from random import choice
 
 
@@ -22,6 +21,7 @@ def jokes():
 
 
 def joke_two_api_call():
+    # https://holypython.com/official-jokes-api/
     data = requests.get('https://official-joke-api.appspot.com/random_joke')
     data_return = json.loads(data.text)
 
