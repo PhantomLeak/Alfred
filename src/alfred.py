@@ -28,6 +28,4 @@ if __name__ == '__main__':
 # TODO: Allow Alfred to set reminders / write to Google Calendar...
 # TODO: Create User classes to allow for individual profiles
 
-##TODO:: Create a font-end for Alfred, maybe using flask or Javascript? 
-
-###TODO:: Clean up weather inputs...Response works but the temperature comes back with odd numbers
+##TODO:: Create a font-end for Alfred, maybe using flask or Javascript?
