@@ -2,6 +2,8 @@ from geopy.geocoders import Nominatim
 import requests
 import json
 import logging
+from tqdm import trange
+from time import sleep
 from src.api_keys import OPEN_WEATHER_API_KEY
 
 # Initialize Nominatim API
@@ -14,6 +16,8 @@ def weather(weather_init: str):
         location = get_weather_location(weather_init)
         lon = location.longitude
         lat = location.latitude
+        for i in trange(5):
+            sleep(.1)
 
         data = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_API_KEY}&units=imperial')
         data_return = json.loads(data.text)
