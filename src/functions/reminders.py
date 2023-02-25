@@ -1,9 +1,10 @@
-import chime
+import logging
 import re
 from threading import Timer
-from functions.terminal_colors import colors as terminal_message
 from tkinter import messagebox
-import logging
+
+import chime
+from functions.terminal_colors import colors as terminal_message
 
 tc = terminal_message()
 

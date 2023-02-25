@@ -1,6 +1,7 @@
+import logging
 import math
 import re
-import logging
+
 
 # Strip numbers out of string and determine calculation types
 def string_num_seperator(string):

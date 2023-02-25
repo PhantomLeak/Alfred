@@ -1,6 +1,6 @@
+import logging
 import webbrowser
 from urllib.parse import quote
-import logging
 
 
 def search_web(search_request: str = None):

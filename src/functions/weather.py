@@ -1,9 +1,11 @@
-from geopy.geocoders import Nominatim
-import requests
 import json
 import logging
-from tqdm import trange
 from time import sleep
+
+import requests
+from geopy.geocoders import Nominatim
+from tqdm import trange
+
 from src.api_keys import OPEN_WEATHER_API_KEY
 
 # Initialize Nominatim API

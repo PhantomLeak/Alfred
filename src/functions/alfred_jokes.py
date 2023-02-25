@@ -1,8 +1,9 @@
-import pyjokes
-import requests
 import json
 import logging
 from random import choice
+
+import pyjokes
+import requests
 
 
 def jokes():

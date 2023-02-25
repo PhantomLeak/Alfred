@@ -1,7 +1,8 @@
+import calendar  # Converts daytime number into day of the week
+from datetime import datetime  # Used to get current day of the week
+
 import handler as lg
 from functions.terminal_colors import colors as terminal_message
-from datetime import datetime  # Used to get current day of the week
-import calendar  # Converts daytime number into day of the week
 
 tc = terminal_message()
 

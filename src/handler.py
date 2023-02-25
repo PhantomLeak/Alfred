@@ -1,16 +1,17 @@
-from functions.Games.alfred_games import Games
-from functions.terminal_colors import colors as terminal_message
-from functions.password_generator import Password as Password
+import logging
+import os
+
 import alfred as af
+import assets.temp_db_object as tbo
 import functions.alfred_jokes as aj
-import functions.weather as weather
 import functions.calculator as calculator
 import functions.clear_temp_data as ctd
 import functions.reminders as reminders
-import assets.temp_db_object as tbo
+import functions.weather as weather
 import functions.web_search as web_search
-import logging
-import os
+from functions.Games.alfred_games import Games
+from functions.password_generator import Password as Password
+from functions.terminal_colors import colors as terminal_message
 
 # Class initialization
 alfredGames = Games()

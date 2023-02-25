@@ -1,6 +1,7 @@
+import logging
 import random
 import string
-import logging
+
 
 class Password():
     def __init__(self):
