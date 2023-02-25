@@ -10,7 +10,7 @@ class Password():
     def create_password(self):
         new_password = ''
         try:
-            # pass_len = int(input('How many characters does the password need to be?: '))
+            # pass_len = self.parse_password_len()
 
             new_password = self.generate_password()
         except Exception as e:
@@ -28,3 +28,7 @@ class Password():
             self.logger.exception(e)
 
         return result_str
+    
+    # Allow for password length to be within the string
+    def parse_password_len(password_str: str):
+        pass 
