@@ -10,9 +10,9 @@ class Password():
     def create_password(self):
         new_password = ''
         try:
-            pass_len = int(input('How many characters does the password need to be?: '))
+            # pass_len = int(input('How many characters does the password need to be?: '))
 
-            new_password = self.generate_password(pass_len)
+            new_password = self.generate_password()
         except Exception as e:
             self.logger.exception(e)
 
