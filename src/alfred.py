@@ -6,6 +6,7 @@ from functions.terminal_colors import colors as terminal_message
 
 tc = terminal_message()
 
+
 def alfred_main(i):
     if i is None:
         today = calendar.day_name[datetime.today().weekday()]

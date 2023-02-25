@@ -18,6 +18,7 @@ alfredGames = Games()
 tc = terminal_message()
 password = Password()
 
+
 # Completes the logic for Alfred
 def logic(i):
     response = i.strip()

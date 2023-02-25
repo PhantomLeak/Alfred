@@ -21,7 +21,8 @@ def weather(weather_init: str):
         for i in trange(5):
             sleep(.1)
 
-        data = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_API_KEY}&units=imperial')
+        data = requests.get(
+            f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_API_KEY}&units=imperial')
         data_return = json.loads(data.text)
 
         temp = data_return.get('main')

@@ -1,7 +1,9 @@
 from genericpath import isfile
 from functions.terminal_colors import colors as terminal_message
 import os
+
 tc = terminal_message()
+
 
 # List of directories that contain temporary files that should be deleted
 
@@ -16,4 +18,4 @@ def clear_local_files():
                     os.remove(os.path.join(root, file))
                     print(tc.output_message(f'succesfully removed the temp file{file}'))
                 except Exception as e:
-                        print(tc.error_message(f'{e}'))
+                    print(tc.error_message(f'{e}'))

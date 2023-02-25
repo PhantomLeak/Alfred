@@ -28,4 +28,3 @@ class Password():
             self.logger.exception(e)
 
         return result_str
-
