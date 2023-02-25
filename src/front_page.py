@@ -5,14 +5,13 @@ import os
 template_dir = os.path.abspath('../templates')
 app = Flask(__name__, template_folder=template_dir)
 
-@app.route("/")
+@app.route('/', methods=["GET", "POST"])
+def main():
+    processed_text = ''
 
-def hello_world():
-    return render_template('index.html')
+    if request.method == "POST":
+        text = request.form['text']
+        text = request.form['text']
+        processed_text = alfred.alfred_main(text)
 
-# This will return what has been written inside of the text block
-@app.route('/', methods=['POST'])
-def my_form_post():
-    text = request.form['text']
-    processed_text = alfred.alfred_main(text)
-    return processed_text
+    return render_template('index.html', return_value=processed_text)
