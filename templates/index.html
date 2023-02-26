@@ -4,23 +4,26 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="icon" type="image/png" href="../src/assets/Photos/icons8-butler-60.png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
     <title>Alfred</title>
   </head>
   <body>
-    <form class="form-inline" method="POST">
-        <input 
-            type="text" placeholder="Enter A Command"
-            class="form-control" id="commandInput" name="commandRequest"
-            aria-describedby="comandHelp">
-        <input type="submit" class="btn btn-primary mb-2 mt-2">
-    </form>
+    <div class="row row-cols-6">
+      <div class="col-6 mx-auto mt-5">
+        <form class="form-inline" method="POST">
+          <input 
+              type="text" placeholder="Enter A Command"
+              class="form-control mb-3" id="commandInput" name="commandRequest"
+              aria-describedby="comandHelp">
+          <input type="submit" class="btn btn-primary mb-2 mt-2">
+        </form>
+      </b-col>
+    </b-row>
 
 
-    <div id="response_block" class="text-center">
+    <div id="response_block" class="text-center mt-10" style="border: 1px solid black;">
         <span>{{return_value}}</span>
     </div>
 

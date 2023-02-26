@@ -42,69 +42,45 @@ def logic(i):
         if response in tbo.password_initiators:
             new_password = password.create_password()
 
-            # print(tc.output_with_return_message('Your new password is:', new_password))
-            # af.alfred_main(1)
             return new_password
 
-        # elif 'weather' in response.lower():
-        #     forecast = weather.weather(response)
-        #     print(tc.output_message(forecast))
-        #     af.alfred_main(1)
+        elif 'weather' in response.lower():
+            forecast = weather.weather(response)
+            return forecast
 
         # elif response in tbo.local_storage_iniators:
         #     ctd.clear_local_files()
         #     af.alfred_main(1)
 
-        # elif ('+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response
-        #       or 'squared' in response or 'power of' in response):
-        #     calc = calculator.string_num_seperator(response)
-        #     print(tc.output_message('The Answer is: ' + str(calc) + '\n'))
-        #     af.alfred_main(1)
+        elif ('+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response
+              or 'squared' in response or 'power of' in response):
+            calc = calculator.string_num_seperator(response)
+            return f'The answer is: {str(calc)}'
 
-        # elif response in tbo.joke_initiators:
-        #     joke = aj.jokes()
-        #     print(tc.output_message('\n' + '- ' + joke + '\n'))
-        #     anotherJoke = input(tc.prompt_message('Would you like to hear another?:'))
+        elif response in tbo.joke_initiators:
+            joke = aj.jokes()
+            print(tc.output_message('\n' + '- ' + joke + '\n'))
+            return joke
 
-        #     if anotherJoke.lower() == 'y' or anotherJoke.lower() == 'yes':
-        #         logic('joke')
-        #     if anotherJoke.lower() == 'n' or anotherJoke.lower() == 'no':
-        #         af.alfred_main(1)
-        #     else:
-        #         print(tc.error_message("I don't quite understand..."))
-        #         af.alfred_main(1)
+        elif 'open' in response or 'search for' in response:
+            success = web_search.search_web(response)
 
-        # elif 'open' in response or 'search for' in response:
-        #     success = web_search.search_web(response)
+            return 'Opening new tab!'
 
-        #     print(tc.output_message(success))
-        #     af.alfred_main(1)
+        elif 'set a reminder' in response or 'remind me' in response:
+            reminders.set_reminder(response)
+            return 'Reminder Set'
 
-        # elif 'set a reminder' in response or 'remind me' in response:
-        #     reminders.set_reminder(response)
-        #     af.alfred_main(1)
+        elif response == 'help':
+            return_response = ''
+            return_response += 'Here are some of the commands I can help you with: '
 
-        # elif response == 'clear':
-        #     os.system('cls' if os.name == 'nt' else 'clear')
-        #     af.alfred_main(1)
+            for idx, commands in enumerate(tbo.help_options):
+                return_response += f'{idx}. {commands}'
+            
+            return return_response
 
-        # elif response == 'help':
-        #     print("Here are some of the commands I can help you with: ")
-
-        #     for idx, commands in enumerate(tbo.help_options):
-        #         print(tc.output_message(f"{idx}. {commands}"))
-        #     af.alfred_main(1)
-
-        # elif i == 'end' or i == 'exit' or i == 'no':
-        #     print(tc.output_message('I hope you have a great day!'))
-        #     exit()
-
-        # else:
-        #     if i.strip == 'game':
-        #         user_input = input(tc.prompt_message('Do you want to play a game?:')).lower()
-        #         if user_input == 'yes' or user_input == 'y':
-        #             logic("I want to play a game")
-        #     print(tc.error_message("I'm sorry, I don't quite understand, can you try again? "))
-        #     af.alfred_main(1)
+        else:
+            return "I'm sorry, I don't quite understand, can you try again?"
     except Exception as e:
         logging.exception(e)

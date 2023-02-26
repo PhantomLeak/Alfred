@@ -18,8 +18,8 @@ def weather(weather_init: str):
         location = get_weather_location(weather_init)
         lon = location.longitude
         lat = location.latitude
-        for i in trange(5):
-            sleep(.1)
+        # for i in trange(5):
+        #     sleep(.1)
 
         data = requests.get(
             f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_API_KEY}&units=imperial')
@@ -30,11 +30,12 @@ def weather(weather_init: str):
         overcast = data_return.get('weather')
 
         weather_return += (f"- The weather today is going to be {overcast[0]['description']} \n")
-        weather_return += '\n'
+
         weather_return += (f"- With wind speeds of {wind['speed']} MPH, at {wind['deg']} degrees \n")
-        weather_return += '\n'
+
         weather_return += f"- The temperature today will reach a high of {temp['temp_max']} and a low of {temp['temp_min']}."
         weather_return += f"Currently, the temperature is {temp['temp']} with {temp['humidity']}% humidity\n"
+
     except Exception as e:
         logging.exception(e)
 

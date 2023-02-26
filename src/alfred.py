@@ -9,6 +9,7 @@ tc = terminal_message()
 
 def alfred_main(i):
     return lg.logic(i.lower().strip())
+
     # if i is None:
     #     today = calendar.day_name[datetime.today().weekday()]
 
