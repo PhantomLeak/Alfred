@@ -6,7 +6,7 @@ import requests
 from geopy.geocoders import Nominatim
 from tqdm import trange
 
-from api_keys import OPEN_WEATHER_API_KEY
+from src.api_keys import OPEN_WEATHER_API_KEY
 
 # Initialize Nominatim API
 geolocator = Nominatim(user_agent="MyApp")

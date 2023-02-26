@@ -1,21 +1,14 @@
 import logging
-import os
-
-import alfred as af
-import assets.temp_db_object as tbo
-import functions.alfred_jokes as aj
-import functions.calculator as calculator
-import functions.clear_temp_data as ctd
-import functions.reminders as reminders
-import functions.weather as weather
-import functions.web_search as web_search
-from functions.Games.alfred_games import Games
-from functions.password_generator import Password as Password
-from functions.terminal_colors import colors as terminal_message
+from src.assets import temp_db_object as tbo
+from src.functions import alfred_jokes as aj
+from src.functions import calculator as calculator
+from src.functions import reminders as reminders
+from src.functions import weather as weather
+from src.functions import web_search as web_search
+from src.functions.password_generator import Password as Password
 
 # Class initialization
-alfredGames = Games()
-tc = terminal_message()
+
 password = Password()
 
 
@@ -23,6 +16,13 @@ password = Password()
 def logic(i):
     response = i.strip()
     try:
+        ## -- NEED TO REWRITE THE GAME HANDLER AND FUNCTIONS -- ##
+        
+        # if 'game' in response:
+        #     if 'snake' in response:
+        #         alfredGames.gameDecision('snake_game')
+        
+        #     return 'loading...'
         # if response in tbo.game_initiators:
         #     game_choice = input(tc.prompt_message(
         #         f"Which game would you like to play? ({tc.prompt_message_choices(1, 'Rock Paper Scissors,')}, {tc.prompt_message_choices(2, 'Guessing Game,')}, {tc.prompt_message_choices(3, 'Sudoku,')} {tc.prompt_message_choices(4, 'Snake Game,')} {tc.prompt_message_choices(5, 'Quit):')}"))
@@ -48,10 +48,6 @@ def logic(i):
             forecast = weather.weather(response)
             return forecast
 
-        # elif response in tbo.local_storage_iniators:
-        #     ctd.clear_local_files()
-        #     af.alfred_main(1)
-
         elif ('+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response
               or 'squared' in response or 'power of' in response):
             calc = calculator.string_num_seperator(response)
@@ -59,7 +55,6 @@ def logic(i):
 
         elif response in tbo.joke_initiators:
             joke = aj.jokes()
-            print(tc.output_message('\n' + '- ' + joke + '\n'))
             return joke
 
         elif 'open' in response or 'search for' in response:

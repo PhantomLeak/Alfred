@@ -4,9 +4,6 @@ from threading import Timer
 from tkinter import messagebox
 
 import chime
-from functions.terminal_colors import colors as terminal_message
-
-tc = terminal_message()
 
 
 def set_reminder(reminder):

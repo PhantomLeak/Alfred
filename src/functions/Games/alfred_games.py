@@ -1,5 +1,4 @@
 import random  
-import alfred as af
 from functions.Games import snake_game as sg
 from functions.terminal_colors import colors as terminal_message
 #from Games.sudoku_gui import Grid as SudokuGame
@@ -33,7 +32,6 @@ class Games():
                 self.gameDecision('snake_game')
         elif choice == "no" or choice.lower() == 'n':
             print(tc.output_message('Not a problem'))
-            af.alfred_main(1)
         else:
             print(tc.error_message("I don't quite understand...please try that again"))
             self.play_again(current_mode)
@@ -51,7 +49,8 @@ class Games():
             print(tc.output_message(f"You lose, the computer chose {typeValue[comp]}\n"))
             self.play_again(mode)
         elif user == "4":
-            af.alfred_main(1)
+            pass
+            # af.alfred_main(1)
         else:
             print(tc.output_message(f"You win! the computer chose {typeValue[comp]} \n"))
             self.play_again(mode)
@@ -81,7 +80,8 @@ class Games():
             self.guessing_game(highNumber + 10)
         elif next_level == 'n' or next_level == 'no':
             print(tc.output_message("Well, I hope to see you soon!! \n"))
-            af.alfred_main(1)
+            # af.alfred_main(1)
+            pass
 
     def snake_game(self):
         sg.run_game()
