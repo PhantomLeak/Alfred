@@ -11,7 +11,7 @@ if __name__ == '__main__':
     try:
         alfred_main(None)
     except KeyboardInterrupt:
-        print(tc.error_message('Interrupted'))
+        print('Interupted')
 
 ### LIST OF TASKS TO BE COMPLETED
 # TODO: Allow Alfred to do speech to text recognition so I can speak to him rather than typing (Kinda like Iron man and Jarvis)
