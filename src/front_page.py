@@ -10,8 +10,9 @@ def main():
     processed_text = ''
 
     if request.method == "POST":
-        text = request.form['text']
-        text = request.form['text']
+        text = request.form['commandRequest']
+        text = request.form['commandRequest']
+        print(text)
         processed_text = alfred.alfred_main(text)
 
     return render_template('index.html', return_value=processed_text)
