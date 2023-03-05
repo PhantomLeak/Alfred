@@ -3,7 +3,7 @@
       <v-card :loading="loading" height="80vh">
         <v-card-title>
           <v-spacer />
-          <h2>Hello sir, how can I assist you today?</h2>
+          <h2>{{ greeting }}</h2>
           <v-spacer />
         </v-card-title>
         <v-card-text>
@@ -56,6 +56,7 @@
         requestMsg: '',
         msg: '',
         loading: false,
+        greeting: '',
       };
     },
     components: {},
@@ -78,8 +79,20 @@
       clearInfo() {
         this.msg = ''
         this.requestMsg = ''
-      }
+      },
+      async getGreeting() {
+        axios.get(PATH).then((ret) => {
+          if (ret.data) {
+            this.greeting = ret.data.greeting_msg
+          }
+        })
+      },
     },
     created() {},
+    async mounted() {
+      this.loading = true
+      await this.getGreeting()
+      this.loading = false
+    }
   };
   </script>
