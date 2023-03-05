@@ -1,5 +1,5 @@
 # Alfred
-Terminal based virtual assistant to help with every day needs and to have a conversation with
+Chatbot / virtual assistant written in Vuejs & Python to help with every day needs.
 
 ## Features
 - Ability to play limited games against computer or solo games like Snake and Sudoku
