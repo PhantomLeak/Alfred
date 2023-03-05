@@ -1,18 +1,22 @@
 import logging
 import random
 import string
+import re
 
 
 class Password():
     def __init__(self):
         self.logger = logging.getLogger(type(self).__qualname__)
 
-    def create_password(self):
+    def create_password(self, password_init):
         new_password = ''
-        try:
-            # pass_len = self.parse_password_len()
+        pass_len = 16
 
-            new_password = self.generate_password()
+        try:
+            if any(char.isdigit() for char in password_init):
+                pass_len = re.findall(r'\d+', password_init)[0]
+            
+            new_password = self.generate_password(pass_len=int(pass_len))
         except Exception as e:
             self.logger.exception(e)
 
@@ -28,7 +32,4 @@ class Password():
             self.logger.exception(e)
 
         return result_str
-    
-    # Allow for password length to be within the string
-    def parse_password_len(password_str: str):
-        pass 
+

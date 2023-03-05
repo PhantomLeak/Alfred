@@ -1,20 +1,34 @@
-from flask import Flask, request, render_template
-from src import alfred as alfred
-import os
+from flask import Flask, request, render_template, jsonify
+from flask_cors import CORS
+from src.handler import logic
+import logging
 
-template_dir = os.path.abspath('templates')
+# Config
+DEBUG = True
 
-app = Flask(__name__, template_folder=template_dir)
+app = Flask(__name__)
+app.config.from_object(__name__)
 
-@app.route('/', methods=["GET", "POST"])
-def main():
-    processed_text = ''
+# enable CORS
+CORS(app, resources={f'/*': {'origins': '*'}})
 
-    if request.method == "POST":
-        text = request.form['commandRequest']
-        processed_text = alfred.alfred_main(text)
-    
-    return render_template('index.html', return_value=processed_text)
-# Running app
+
+@app.route('/', methods=['GET', 'POST'])
+def alfred():
+    response_obj = {}
+
+    if request.method == 'POST':
+        try:
+            post_data = request.get_json()
+            request_msg = post_data.get('request_msg')
+            return_response = logic(request=request_msg)
+            response_obj = {'response': 200, 'return_msg': return_response}
+        except Exception as e:
+            logging.exception(e)
+            response_obj = {'response': 404}
+
+    return jsonify(response_obj)
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

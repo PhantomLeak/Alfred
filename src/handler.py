@@ -8,20 +8,19 @@ from src.functions import web_search as web_search
 from src.functions.password_generator import Password as Password
 
 # Class initialization
-
 password = Password()
 
 
 # Completes the logic for Alfred
-def logic(i):
-    response = i.strip()
+def logic(request: str = ''):
+    response = request.lower().strip()
     try:
         ## -- NEED TO REWRITE THE GAME HANDLER AND FUNCTIONS -- ##
-        
+
         # if 'game' in response:
         #     if 'snake' in response:
         #         alfredGames.gameDecision('snake_game')
-        
+
         #     return 'loading...'
         # if response in tbo.game_initiators:
         #     game_choice = input(tc.prompt_message(
@@ -39,8 +38,8 @@ def logic(i):
         #         print(tc.output_message('GoodBye, come play again!'))
         #         af.alfred_main(1)
 
-        if response in tbo.password_initiators:
-            new_password = password.create_password()
+        if 'password' in response:
+            new_password = password.create_password(password_init=response)
 
             return new_password
 
@@ -60,7 +59,7 @@ def logic(i):
         elif 'open' in response or 'search for' in response:
             success = web_search.search_web(response)
 
-            return 'Opening new tab!'
+            return success
 
         elif 'set a reminder' in response or 'remind me' in response:
             reminders.set_reminder(response)
@@ -72,7 +71,7 @@ def logic(i):
 
             for idx, commands in enumerate(tbo.help_options):
                 return_response += f'{idx}. {commands}'
-            
+
             return return_response
 
         else:

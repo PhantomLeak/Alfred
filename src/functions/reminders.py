@@ -9,8 +9,7 @@ import chime
 def set_reminder(reminder):
     try:
         # Use positive lookbehind to get the next word after 'in'
-        time_digit = re.search('(?<=in )(\w+)', reminder).group(
-            1)  # Get the first parenthesised subgroup from regex search
+        time_digit = re.search('(?<=in )(\w+)', reminder).group(1)  # Get the first parenthesised subgroup from regex search
 
         before_keyword, keyword, after_keyword = reminder.partition(time_digit)
 

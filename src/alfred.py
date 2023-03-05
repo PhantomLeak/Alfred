@@ -4,12 +4,12 @@ from datetime import datetime  # Used to get current day of the week
 from src import handler as lg
 
 
-def alfred_main(i):
-    return lg.logic(i.lower().strip())
+def alfred_main(request: ''):
+    return lg.logic(request.lower().strip())
 
 if __name__ == '__main__':
     try:
-        alfred_main(None)
+        alfred_main('')
     except KeyboardInterrupt:
         print('Interupted')
 
