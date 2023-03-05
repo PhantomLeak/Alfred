@@ -6,9 +6,11 @@ from src.functions import reminders as reminders
 from src.functions import weather as weather
 from src.functions import web_search as web_search
 from src.functions.password_generator import Password as Password
+from src.functions.Games.alfred_games import Games
 
 # Class initialization
 password = Password()
+alfredGames = Games()
 
 
 # Completes the logic for Alfred

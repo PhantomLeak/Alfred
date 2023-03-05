@@ -1,6 +1,6 @@
 import random  
-from functions.Games import snake_game as sg
-from functions.terminal_colors import colors as terminal_message
+from src.functions.Games import snake_game as sg
+from src.functions.terminal_colors import colors as terminal_message
 #from Games.sudoku_gui import Grid as SudokuGame
 
 tc = terminal_message()

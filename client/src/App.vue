@@ -5,7 +5,14 @@
       color="primary"
       dark
     >
-    <h1>Alfred</h1>
+    <v-img
+          alt="Alfred"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="50"
+          src="../public/butler-black.png"
+          width="50"
+        />
     </v-app-bar>
 
     <v-main>
