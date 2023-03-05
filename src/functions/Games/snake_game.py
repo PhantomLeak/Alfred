@@ -2,7 +2,6 @@ import turtle
 import tkinter
 import time
 import random
-import alfred as af
 
 def run_game():
     delay = 0.1
@@ -96,7 +95,7 @@ def run_game():
             gamePlay = False
             wn.reset()
             turtle.Screen().bye() #Close the Turtle screen window
-            af.alfred_main(1)
+            
         if head.distance(food) < 20:
             x = random.randint(-270,270)
             y = random.randint(-270,270)

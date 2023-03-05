@@ -20,4 +20,4 @@ def string_num_seperator(string):
     except Exception as e:
         logging.exception(e)
 
-        return eval(''.join(calculations))
+    return eval(''.join(calculations))
