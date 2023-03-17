@@ -22,7 +22,7 @@
                   >Submit</v-btn>
                 
                 <v-btn
-                  v-if="msg !== ''"
+                  v-if="msg"
                   color="red"
                   small
                   class="ml-4"
@@ -31,10 +31,15 @@
               </v-col>
             </v-row>
           </v-form>
-          <v-sheet v-if="msg !== ''" class="mt-10">
+          <v-sheet v-if="msg" class="mt-10">
             <v-card-text>
               <v-row class="align-center justify-center">
-                <v-col cols="6">
+                <v-col v-if="Array.isArray(msg)" cols="6">
+                  <span class="blue--text" v-for="(message, index) in msg" v-bind:key="index">
+                    <span>{{ message }}</span><br/>
+                  </span>
+                </v-col>
+                <v-col v-else cols="6">
                   <span class="blue--text">{{ msg }}</span>
                 </v-col>
               </v-row>
@@ -54,7 +59,7 @@
     data() {
       return {
         requestMsg: '',
-        msg: '',
+        msg: null,
         loading: false,
         greeting: '',
       };
@@ -77,7 +82,7 @@
         })
       },
       clearInfo() {
-        this.msg = ''
+        this.msg = null
         this.requestMsg = ''
       },
       async getGreeting() {

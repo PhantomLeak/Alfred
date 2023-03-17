@@ -13,7 +13,7 @@ geolocator = Nominatim(user_agent="MyApp")
 
 
 def weather(weather_init: str):
-    weather_return = ''
+    weather_return = []
     try:
         location = get_weather_location(weather_init)
         lon = location.longitude
@@ -29,12 +29,12 @@ def weather(weather_init: str):
         wind = data_return.get('wind')
         overcast = data_return.get('weather')
 
-        weather_return += (f"- The weather today is going to be {overcast[0]['description']} \n")
+        weather_return.append(f"- The weather today is going to be {overcast[0]['description']}")
 
-        weather_return += (f"- With wind speeds of {wind['speed']} MPH, at {wind['deg']} degrees \n")
+        weather_return.append(f"- With wind speeds of {wind['speed']} MPH, at {wind['deg']} degrees")
 
-        weather_return += f"- The temperature today will reach a high of {temp['temp_max']} and a low of {temp['temp_min']}."
-        weather_return += f"Currently, the temperature is {temp['temp']} with {temp['humidity']}% humidity\n"
+        weather_return.append(f"- The temperature today will reach a high of {temp['temp_max']} and a low of {temp['temp_min']}. "
+                              f"Currently, the temperature is {temp['temp']} with {temp['humidity']}% humidity")
 
     except Exception as e:
         logging.exception(e)

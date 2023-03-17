@@ -17,6 +17,7 @@ CORS(app, resources={f'/*': {'origins': '*'}})
 @app.route('/', methods=['GET', 'POST'])
 def alfred():
     response_obj = {}
+    return_response = []
 
     if request.method == 'POST':
         try:
