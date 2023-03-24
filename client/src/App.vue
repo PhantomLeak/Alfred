@@ -6,15 +6,24 @@
       dark
     >
       <v-img
-            alt="Alfred"
-            class="shrink mt-1 hidden-sm-and-down"
-            contain
-            min-width="50"
-            src="../public/butler-black.png"
-            width="50"
+        alt="Alfred"
+        class="shrink mt-1 hidden-sm-and-down"
+        contain
+        min-width="50"
+        @click="routeChange('')"
+        src="../public/butler-black.png"
+        width="50"
+        style="cursor: pointer;"
           />
 
       <v-spacer />
+
+      <v-btn
+        small
+        icon
+        title="Resize / Format Images"
+        @click="routeChange('imitari')"
+        ><v-icon small>fa-solid fa-image</v-icon></v-btn>
 
       <v-btn
         small
@@ -37,5 +46,10 @@ export default {
   data: () => ({
     //
   }),
+  methods: {
+    routeChange(page) {
+      this.$router.push('/' + page)
+    }
+  }
 };
 </script>

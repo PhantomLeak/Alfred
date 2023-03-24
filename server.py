@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, send_file
 from flask_cors import CORS
 from src.handler import logic
 from src.functions.greeting import greeting
+from src.functions.imitari import reformat_image
 import logging
 
 # Config
@@ -38,6 +39,26 @@ def alfred():
             response_obj = {'response': 404}
 
     return jsonify(response_obj)
+
+@app.route('/imitari', methods=['POST'])
+def imitari():
+    response_obj = {}
+    try:
+        post_data = request.get_json()
+        image = post_data.get('image')
+        height = post_data.get('height')
+        width = post_data.get('width')
+        format_type = post_data.get('fileType')
+
+        new_image = reformat_image(image=image, width=int(width), height=int(height), format_type=format_type)
+
+        response_obj = {'response': 200, 'image': new_image}
+        return jsonify(response_obj)
+
+    except Exception as e:
+        logging.exception(e)
+        response_obj = {'response': 404}
+        return jsonify(response_obj)
 
 
 if __name__ == '__main__':
