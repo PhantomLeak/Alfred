@@ -44,11 +44,14 @@ def alfred():
 def imitari():
     response_obj = {}
     try:
+        if not image:
+            return jsonify({'response': 404})
+        
         post_data = request.get_json()
         image = post_data.get('image')
-        height = post_data.get('height')
-        width = post_data.get('width')
-        format_type = post_data.get('fileType')
+        height = post_data.get('height', 500)
+        width = post_data.get('width', 500)
+        format_type = post_data.get('fileType', 'PNG')
 
         new_image = reformat_image(image=image, width=int(width), height=int(height), format_type=format_type)
 
