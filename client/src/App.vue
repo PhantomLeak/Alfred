@@ -15,12 +15,21 @@
 
       <v-spacer />
 
-      <v-btn
+      <v-badge
+        pill
+        overlap
+        floating
+        left
+        content="Alpha"
+        color="red"
+        >
+        <v-btn
         small
         icon
         title="Resize / Format Images"
         @click="routeChange('imitari')"
         ><v-icon small color="white">fa-solid fa-image</v-icon></v-btn>
+      </v-badge>
 
       <!-- Future project to enable reminders -->
       <!-- <v-btn
