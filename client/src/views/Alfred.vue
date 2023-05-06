@@ -44,8 +44,8 @@
         >
         <v-card>
           <v-card-title>
-            Change your display name
-            <v-spacer />
+            <span>{{ userNameModalView === 'nameChange' ? 'Change your display name' : 'Change your display color' }}</span>
+        
             <v-btn
               v-if="userNameModalView === 'nameChange'"
               small
@@ -53,33 +53,45 @@
               title="Change color"
               @click="userNameModalView = 'colorChange'"
               ><v-icon small>fa fa-palette</v-icon></v-btn>
-            
+                        
+            <v-spacer />
+            <v-btn
+              x-small
+              icon
+              class="mt-n10 mr-n5"
+              @click="changeUserNameModal = false"
+              ><v-icon x-small>fa fa-times</v-icon></v-btn>
+          </v-card-title>
+          <v-card-text>
+            <v-row class="align-center justify-center">
+              <v-col cols="12">
+                <v-text-field
+                  v-if="userNameModalView === 'nameChange'"
+                  v-model="userName"
+                  />
+                
+                <v-color-picker 
+                  v-if="userNameModalView === 'colorChange'"
+                  class="ml-16"
+                  v-model="displayColor"
+                />
+              </v-col>
+            </v-row>
+          </v-card-text>
+          <v-card-actions>
             <v-btn
               v-if="userNameModalView === 'colorChange'"
               small
-              icon
               title="Back"
+              color="info"
               @click="userNameModalView = 'nameChange'"
-              ><v-icon small>fa fa-arrow-left</v-icon></v-btn>
-          </v-card-title>
-          <v-card-text>
-            <v-text-field
-              v-if="userNameModalView === 'nameChange'"
-              v-model="userName"
-              />
-            
-            <v-color-picker 
-              v-if="userNameModalView === 'colorChange'"
-              v-model="displayColor"
-            />
-          </v-card-text>
-          <v-card-actions>
+              >back</v-btn>
             <v-spacer />
             <v-btn
               @click="setNewUserName()"
-              color="red"
+              color="primary"
               small
-              >Close</v-btn>
+              >Save</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
