@@ -22,11 +22,11 @@
           <v-row no-gutters>
             <v-col>
               <div class="d-flex flex-row align-center">
-                <v-avatar @click="changeUserName()" 
-                  color="indigo" size="36">
+                <v-avatar @click="changeUserName()" class="buttonPointer"
+                  color="indigo" size="36" title="Change Display Name">
                   <span class="white--text">{{ userName[0] }}</span>
                 </v-avatar>
-                <v-text-field v-model="msg" placeholder="Type Something" @keypress.enter="submitCommand"></v-text-field>
+                <v-text-field v-model="msg" class="ml-3" placeholder="Type Something" @keypress.enter="submitCommand" />
                 <v-btn icon class="ml-4" @click="submitCommand"><v-icon>mdi-send</v-icon></v-btn>
               </div>
             </v-col>
@@ -72,7 +72,7 @@
         loading: false,
         chat: [],
         userName: 'user',
-        prevUserName: null,  
+        prevUserNames: [],  
         changeUserNameModal: false
       };
     },
@@ -114,14 +114,14 @@
         })
       },
       isMessageFromUser(from) {
-        if (from === this.userName || from === this.prevUserName) {
+        if (from === this.userName || this.prevUserNames.includes(from)) {
           return true
         } else {
           return false
         }
       },
       changeUserName() {
-        this.prevUserName = this.userName
+        this.prevUserNames.push(this.userName)
         this.changeUserNameModal = true
       },
       setNewUserName() {
