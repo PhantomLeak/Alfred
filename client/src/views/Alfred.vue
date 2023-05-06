@@ -1,14 +1,16 @@
 <template>
     <div class="container">
-      <v-card :loading="loading" height="80vh" class="d-flex flex-column">
-        <v-card-text style="overflow-y: scroll;">
+      <v-card :loading="loading" height="80vh" class="d-flex flex-column" elevation-2>
+        <v-card-text>
           <v-container>
             <v-row>
               <v-col>
                 <div v-for="(item, index) in chat" :key="index" 
                     :class="['d-flex flex-row align-center my-2', isMessageFromUser(item.from) ? 'justify-end': null]">
                   <span v-if="isMessageFromUser(item.from)" class="blue--text mr-3">{{ item.msg }}</span>
-                  <v-avatar :color="isMessageFromUser(item.from) ? 'indigo': 'red'" size="36">
+                  <v-avatar 
+                    :title="item.from"
+                    :color="isMessageFromUser(item.from) ? displayColor : '#217596'" size="36">
                     <span class="white--text">{{ item.from[0] }}</span>
                   </v-avatar>
                   <span v-if="!isMessageFromUser(item.from)" class="blue--text ml-3">{{ item.msg }}</span>
@@ -19,11 +21,11 @@
         </v-card-text>
         <v-spacer />
         <v-card-actions>
-          <v-row no-gutters>
+          <v-row no-gutters fixed>
             <v-col>
               <div class="d-flex flex-row align-center">
                 <v-avatar @click="changeUserName()" class="buttonPointer"
-                  color="indigo" size="36" title="Change Display Name">
+                  :color="displayColor" size="36" title="Change Display Name">
                   <span class="white--text">{{ userName[0] }}</span>
                 </v-avatar>
                 <v-text-field v-model="msg" class="ml-3" placeholder="Type Something" @keypress.enter="submitCommand" />
@@ -37,20 +39,44 @@
       <!-- Change Username dialog-->
       <v-dialog
         v-model="changeUserNameModal"
-        @click:outsize="changeUserNameModal = false"
+        @click:outsize="setNewUserName()"
         width="500"
         >
         <v-card>
-          <v-card-title>Change your display name</v-card-title>
+          <v-card-title>
+            Change your display name
+            <v-spacer />
+            <v-btn
+              v-if="userNameModalView === 'nameChange'"
+              small
+              icon
+              title="Change color"
+              @click="userNameModalView = 'colorChange'"
+              ><v-icon small>fa fa-palette</v-icon></v-btn>
+            
+            <v-btn
+              v-if="userNameModalView === 'colorChange'"
+              small
+              icon
+              title="Back"
+              @click="userNameModalView = 'nameChange'"
+              ><v-icon small>fa fa-arrow-left</v-icon></v-btn>
+          </v-card-title>
           <v-card-text>
             <v-text-field
+              v-if="userNameModalView === 'nameChange'"
               v-model="userName"
               />
+            
+            <v-color-picker 
+              v-if="userNameModalView === 'colorChange'"
+              v-model="displayColor"
+            />
           </v-card-text>
           <v-card-actions>
             <v-spacer />
             <v-btn
-              @click="setNewUserName"
+              @click="setNewUserName()"
               color="red"
               small
               >Close</v-btn>
@@ -72,8 +98,16 @@
         loading: false,
         chat: [],
         userName: 'user',
-        prevUserNames: [],  
-        changeUserNameModal: false
+        displayColor: '#4B0082',
+        prevUserNames: [],
+        prevRequest: '',
+        performSameActionIndicators: [
+          'tell me another one',
+          'tell me another',
+          'again'
+        ],
+        changeUserNameModal: false,
+        userNameModalView: 'nameChange',
       };
     },
     components: {
@@ -82,6 +116,12 @@
       submitCommand() {
         this.loading = true
         this.writeUserRequest()
+        if (this.performSameActionIndicators.includes(this.msg)) {
+          this.msg = this.prevRequest
+        } else {
+          this.prevRequest = this.msg
+        }
+
         let payload = {
           'request_msg': this.msg
         }
@@ -90,12 +130,9 @@
             this.msg = null
             this.addReply(ret.data.return_msg)
           }
+
+          this.loading = false
         })
-        this.loading = false
-      },
-      clearInfo() {
-        this.msg = null
-        this.requestMsg = ''
       },
       async getGreeting() {
         axios.get(PATH).then((ret) => {
@@ -127,10 +164,11 @@
       setNewUserName() {
         this.chat.forEach(m => {
           if (m.from !== 'Alfred') {
-            m.from = this.userName
+            m.from = this.userName  // Update all records from previous messages with proper display name
           }
         })
         this.changeUserNameModal = false
+        this.userNameModalView = 'nameChange'
       }
     },
     created() {},

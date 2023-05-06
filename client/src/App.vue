@@ -6,14 +6,12 @@
     >
       <v-img
         alt="Alfred"
-        class="shrink mt-1 hidden-sm-and-down"
+        class="shrink mt-1 hidden-sm-and-down buttonPointer"
         contain
         min-width="50"
         @click="routeChange('')"
         src="../public/butler-black.png"
-        width="50"
-        style="cursor: pointer;"
-          />
+        width="50"/>
 
       <v-spacer />
 
@@ -22,12 +20,13 @@
         icon
         title="Resize / Format Images"
         @click="routeChange('imitari')"
-        ><v-icon small>fa-solid fa-image</v-icon></v-btn>
+        ><v-icon small color="white">fa-solid fa-image</v-icon></v-btn>
 
-      <v-btn
+      <!-- Future project to enable reminders -->
+      <!-- <v-btn
         small
         icon
-        ><v-icon small>fa-solid fa-bell</v-icon></v-btn>
+        ><v-icon small>fa-solid fa-bell</v-icon></v-btn> -->
     
     </v-app-bar>
 
