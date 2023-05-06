@@ -2,8 +2,7 @@
   <v-app>
     <v-app-bar
       app
-      color="primary"
-      dark
+      class="topToolBar"
     >
       <v-img
         alt="Alfred"
@@ -53,3 +52,8 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+// Import main / global style for Alfred
+@import 'assets/css/custom';
+</style>

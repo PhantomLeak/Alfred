@@ -1,52 +1,62 @@
 <template>
     <div class="container">
-      <v-card :loading="loading" height="80vh">
-        <v-card-title>
-          <v-spacer />
-          <h2>{{ greeting }}</h2>
-          <v-spacer />
-        </v-card-title>
-        <v-card-text>
-          <v-form ref="postCommand" @submit.prevent="submitCommand">
-            <v-row class="align-center justify-center">
-              <v-col cols="8">
-                <v-text-field
-                  v-model="requestMsg"
-                  solo dense
-                  placeholder="Enter Your Request Here..."
-                />
-                <v-btn
-                  color="primary"
-                  small
-                  @click="submitCommand"
-                  >Submit</v-btn>
-                
-                <v-btn
-                  v-if="msg"
-                  color="red"
-                  small
-                  class="ml-4"
-                  @click="clearInfo"
-                  >Clear</v-btn>
+      <v-card :loading="loading" height="80vh" class="d-flex flex-column">
+        <v-card-text style="overflow-y: scroll;">
+          <v-container>
+            <v-row>
+              <v-col>
+                <div v-for="(item, index) in chat" :key="index" 
+                    :class="['d-flex flex-row align-center my-2', isMessageFromUser(item.from) ? 'justify-end': null]">
+                  <span v-if="isMessageFromUser(item.from)" class="blue--text mr-3">{{ item.msg }}</span>
+                  <v-avatar :color="isMessageFromUser(item.from) ? 'indigo': 'red'" size="36">
+                    <span class="white--text">{{ item.from[0] }}</span>
+                  </v-avatar>
+                  <span v-if="!isMessageFromUser(item.from)" class="blue--text ml-3">{{ item.msg }}</span>
+                </div>
               </v-col>
             </v-row>
-          </v-form>
-          <v-sheet v-if="msg" class="mt-10">
-            <v-card-text>
-              <v-row class="align-center justify-center">
-                <v-col v-if="Array.isArray(msg)" cols="6">
-                  <span class="blue--text" v-for="(message, index) in msg" v-bind:key="index">
-                    <span>{{ message }}</span><br/>
-                  </span>
-                </v-col>
-                <v-col v-else cols="6">
-                  <span class="blue--text">{{ msg }}</span>
-                </v-col>
-              </v-row>
-            </v-card-text>
-          </v-sheet>
+          </v-container>
         </v-card-text>
+        <v-spacer />
+        <v-card-actions>
+          <v-row no-gutters>
+            <v-col>
+              <div class="d-flex flex-row align-center">
+                <v-avatar @click="changeUserName()" 
+                  color="indigo" size="36">
+                  <span class="white--text">{{ userName[0] }}</span>
+                </v-avatar>
+                <v-text-field v-model="msg" placeholder="Type Something" @keypress.enter="submitCommand"></v-text-field>
+                <v-btn icon class="ml-4" @click="submitCommand"><v-icon>mdi-send</v-icon></v-btn>
+              </div>
+            </v-col>
+          </v-row>
+        </v-card-actions>
       </v-card>
+
+      <!-- Change Username dialog-->
+      <v-dialog
+        v-model="changeUserNameModal"
+        @click:outsize="changeUserNameModal = false"
+        width="500"
+        >
+        <v-card>
+          <v-card-title>Change your display name</v-card-title>
+          <v-card-text>
+            <v-text-field
+              v-model="userName"
+              />
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              @click="setNewUserName"
+              color="red"
+              small
+              >Close</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </template>
   
@@ -58,28 +68,30 @@
     name: 'Alfred-vue',
     data() {
       return {
-        requestMsg: '',
         msg: null,
         loading: false,
-        greeting: '',
+        chat: [],
+        userName: 'user',
+        prevUserName: null,  
+        changeUserNameModal: false
       };
     },
-    components: {},
+    components: {
+    },
     methods: {
       submitCommand() {
         this.loading = true
-
+        this.writeUserRequest()
         let payload = {
-          'request_msg': this.requestMsg
+          'request_msg': this.msg
         }
         axios.post(PATH, payload).then((ret) => {
           if (ret.data) {
-            this.msg = ret.data.return_msg
-            this.requestMsg = ''
+            this.msg = null
+            this.addReply(ret.data.return_msg)
           }
-
-          this.loading = false
         })
+        this.loading = false
       },
       clearInfo() {
         this.msg = null
@@ -88,10 +100,38 @@
       async getGreeting() {
         axios.get(PATH).then((ret) => {
           if (ret.data) {
-            this.greeting = ret.data.greeting_msg
+            this.addReply(ret.data.greeting_msg)  
           }
         })
       },
+      writeUserRequest: function(){
+        this.chat.push({from: this.userName, msg: this.msg})
+      },
+      addReply(msg){
+        this.chat.push({
+          from: "Alfred",
+          msg: msg
+        })
+      },
+      isMessageFromUser(from) {
+        if (from === this.userName || from === this.prevUserName) {
+          return true
+        } else {
+          return false
+        }
+      },
+      changeUserName() {
+        this.prevUserName = this.userName
+        this.changeUserNameModal = true
+      },
+      setNewUserName() {
+        this.chat.forEach(m => {
+          if (m.from !== 'Alfred') {
+            m.from = this.userName
+          }
+        })
+        this.changeUserNameModal = false
+      }
     },
     created() {},
     async mounted() {
@@ -101,3 +141,5 @@
     }
   };
   </script>
+<style scoped lang="scss">
+</style>
