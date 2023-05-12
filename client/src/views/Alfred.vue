@@ -7,13 +7,13 @@
               <v-col>
                 <div v-for="(item, index) in chat" :key="index" 
                     :class="['d-flex flex-row align-center my-2', isMessageFromUser(item.from) ? 'justify-end': null]">
-                  <span v-if="isMessageFromUser(item.from)" class="blue--text mr-3">{{ item.msg }}</span>
+                  <span v-if="isMessageFromUser(item.from)" class="blue--text mr-3" v-html="item.msg" />
                   <v-avatar 
                     :title="item.from"
                     :color="isMessageFromUser(item.from) ? displayColor : '#217596'" size="36">
                     <span class="white--text">{{ item.from[0] }}</span>
                   </v-avatar>
-                  <span v-if="!isMessageFromUser(item.from)" class="blue--text ml-3">{{ item.msg }}</span>
+                  <span v-if="!isMessageFromUser(item.from)" class="blue--text ml-3" v-html="item.msg" />
                 </div>
               </v-col>
             </v-row>

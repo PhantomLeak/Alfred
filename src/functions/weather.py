@@ -13,13 +13,11 @@ geolocator = Nominatim(user_agent="MyApp")
 
 
 def weather(weather_init: str):
-    weather_return = []
+    weather_return = ''
     try:
         location = get_weather_location(weather_init)
         lon = location.longitude
         lat = location.latitude
-        # for i in trange(5):
-        #     sleep(.1)
 
         data = requests.get(
             f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_API_KEY}&units=imperial')
@@ -29,12 +27,10 @@ def weather(weather_init: str):
         wind = data_return.get('wind')
         overcast = data_return.get('weather')
 
-        weather_return.append(f"- The weather today is going to be {overcast[0]['description']}")
-
-        weather_return.append(f"- With wind speeds of {wind['speed']} MPH, at {wind['deg']} degrees")
-
-        weather_return.append(f"- The temperature today will reach a high of {temp['temp_max']} and a low of {temp['temp_min']}. "
-                              f"Currently, the temperature is {temp['temp']} with {temp['humidity']}% humidity")
+        weather_return += f"<span>The weather today is going to be {overcast[0]['description']}</span> <br/>"
+        weather_return += f"<span>With wind speeds of {wind['speed']} MPH, at {wind['deg']} degrees</span> <br/>"
+        weather_return += f"<span>The temperature today will reach a high of {temp['temp_max']} and a low of {temp['temp_min']}.</span> <br/>"
+        weather_return += f"<span>Currently, the temperature is {temp['temp']} with {temp['humidity']}% humidity.</span>"
 
     except Exception as e:
         logging.exception(e)

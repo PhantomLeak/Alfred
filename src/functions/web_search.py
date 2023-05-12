@@ -4,7 +4,7 @@ from urllib.parse import quote
 
 
 def search_web(search_request: str = None):
-    success_message = 'Search Was Successful'
+    success_message = 'Your request was successful! Happy browsing!'
 
     try:
         url = create_search_url(search_request)
