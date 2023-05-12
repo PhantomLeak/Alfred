@@ -24,7 +24,7 @@ def alfred():
         try:
             post_data = request.get_json()
             request_msg = post_data.get('request_msg')
-            return_response = logic(request=request_msg)
+            return_response = logic(response=request_msg)
             response_obj = {'response': 200, 'return_msg': return_response}
         except Exception as e:
             logging.exception(e)

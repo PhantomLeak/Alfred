@@ -4,6 +4,7 @@ from src.functions import alfred_jokes as aj
 from src.functions import calculator as calculator
 from src.functions import reminders as reminders
 from src.functions import weather as weather
+from src.functions import cur_date_time as cur_date_time
 from src.functions import web_search as web_search
 from src.functions.password_generator import Password as Password
 from src.functions.Games.alfred_games import Games
@@ -14,8 +15,7 @@ alfredGames = Games()
 
 
 # Completes the logic for Alfred
-def logic(request: str = ''):
-    response = request.lower().strip()
+def logic(response: str = ''):
     try:
         ## -- NEED TO REWRITE THE GAME HANDLER AND FUNCTIONS -- ##
 
@@ -62,10 +62,16 @@ def logic(request: str = ''):
             success = web_search.search_web(response)
 
             return success
+        
+        elif ("todays date" in response or "today's date" in response or "current date" in response 
+              or "current time" in response or "time right now" in response):
+            date_time = cur_date_time.get_date_time(response=response)
 
-        elif 'set a reminder' in response or 'remind me' in response:
-            reminders.set_reminder(response)
-            return 'Reminder Set'
+            return date_time
+
+        # elif 'set a reminder' in response or 'remind me' in response:
+        #     reminders.set_reminder(response)
+        #     return 'Reminder Set'
 
         elif response == 'help':
             return_response = ''
