@@ -5,7 +5,7 @@
           <v-container>
             <v-row>
               <v-col>
-                <div v-for="(item, index) in chat" :key="index" 
+                <div v-for="(item, index) in chat" :key="index" style="text-overflow: clip;"
                     :class="['d-flex flex-row align-center my-2', isMessageFromUser(item.from) ? 'justify-end': null]">
                   <span v-if="isMessageFromUser(item.from)" class="blue--text mr-3" v-html="item.msg" />
                   <v-avatar 
@@ -102,6 +102,7 @@
   import axios from 'axios';
   
   const PATH = 'http://localhost:5000/'
+  const PAGE_STORAGE_KEY = 'alfred'
   export default {
     name: 'Alfred-vue',
     data() {
@@ -179,13 +180,45 @@
             m.from = this.userName  // Update all records from previous messages with proper display name
           }
         })
+        this.saveItemsToLocalStorage()
         this.changeUserNameModal = false
         this.userNameModalView = 'nameChange'
+      },
+      saveItemsToLocalStorage() {
+        let settings = JSON.parse(localStorage.getItem(PAGE_STORAGE_KEY))
+        if (settings) {
+          settings.userName = this.userName
+          settings.prevUserNames = this.prevUserNames
+          settings.displayColor = this.displayColor
+        }
+        else {
+          settings = {
+            userName: this.userName,
+            prevUserNames: this.prevUserNames,
+            displayColor: this.displayColor
+          }
+        }
+
+        localStorage.setItem(PAGE_STORAGE_KEY, JSON.stringify(settings))
       }
     },
     created() {},
     async mounted() {
       this.loading = true
+
+      let settings = JSON.parse(localStorage.getItem(PAGE_STORAGE_KEY))
+      if (settings) {
+        if (settings.userName && settings.userName !== undefined) {
+          this.userName = settings.userName
+        }
+        if (settings.prevUserNames && settings.prevUserNames !== []) {
+          this.prevUserNames = settings.prevUserNames
+        }
+        if (settings.displayColor && settings.displayColor !== undefined) {
+          this.displayColor = settings.displayColor
+        }
+      }
+
       await this.getGreeting()
       this.loading = false
     }
