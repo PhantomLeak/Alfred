@@ -16,6 +16,7 @@ alfredGames = Games()
 
 # Completes the logic for Alfred
 def logic(response: str = ''):
+    response = response.lower().strip()
     try:
         ## -- NEED TO REWRITE THE GAME HANDLER AND FUNCTIONS -- ##
 
