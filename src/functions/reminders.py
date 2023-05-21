@@ -76,8 +76,9 @@ def get_reminder_message(before, after):
 
 # Chime and display alert once the specified timespan has finished
 def alert(reminder_message):
-    try:
-        chime.info()
-        messagebox.showinfo("Reminder", reminder_message)
-    except Exception as e:
-        logging.exception(e)
+    return reminder_message
+    # try:
+    #     chime.info()
+    #     messagebox.showinfo("Reminder", reminder_message)
+    # except Exception as e:
+    #     logging.exception(e)

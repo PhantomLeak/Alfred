@@ -29,7 +29,7 @@
                   <span class="white--text">{{ userName[0] }}</span>
                 </v-avatar>
                 <v-text-field v-model="msg" class="ml-3" placeholder="Type Something" @keypress.enter="submitCommand" />
-                <v-btn icon class="ml-4" @click="submitCommand"><v-icon>mdi-send</v-icon></v-btn>
+                <v-btn icon class="ml-4" @click="submitCommand" title="Send Message"><v-icon>mdi-send</v-icon></v-btn>
               </div>
             </v-col>
           </v-row>

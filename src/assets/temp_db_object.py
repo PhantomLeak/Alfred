@@ -56,9 +56,11 @@ reminders_iniator = [
 ]
 
 help_options = [
-    "generate a password",
-    "Perform Calculations",
+    "Generate passwords",
+    "Perform mathmatical calculations",
     "Display / Show the weather",
     "Set a reminder",
-    "search the web"
+    "Search the web",
+    "Tell current date & time",
+    "Tell jokes"
 ]

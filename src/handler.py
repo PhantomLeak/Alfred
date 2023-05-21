@@ -74,12 +74,14 @@ def logic(response: str = ''):
         #     reminders.set_reminder(response)
         #     return 'Reminder Set'
 
-        elif response == 'help':
-            return_response = ''
-            return_response += 'Here are some of the commands I can help you with: '
+        elif response == 'help' or response == 'what can you do?' or response == 'what can you do':
+            return_response = '<span>'
+            return_response += 'Here are some things I can help you with: <br/>'
 
             for idx, commands in enumerate(tbo.help_options):
-                return_response += f'{idx}. {commands}'
+                return_response += f'<span class="ml-4">{idx + 1}. {commands}</span> <br/>'
+            
+            return_response += '</span>'
 
             return return_response
 
