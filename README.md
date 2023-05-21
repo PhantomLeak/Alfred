@@ -23,3 +23,7 @@ Chatbot / virtual assistant written in Vuejs & Python to help with every day nee
 - Tell current date & time
 - Resize image and change image type (Alpha)
 - Performs mathematical calculations (addition, subtraction, multiplication, division, square root, and powers) 
+
+## 👨 Author
+
+**Dylan Stocking** ([@dylanstocking](https://www.linkedin.com/in/dylanstocking/))
