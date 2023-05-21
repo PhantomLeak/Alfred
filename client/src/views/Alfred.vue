@@ -1,9 +1,9 @@
 <template>
     <div class="container">
       <v-card :loading="loading" height="80vh" class="d-flex flex-column" elevation-2>
-        <v-card-text>
+        <v-card-text style="overflow-y: auto; display: flex; flex-direction: column-reverse;">
           <v-container>
-            <v-row>
+            <v-row align="end">
               <v-col>
                 <div v-for="(item, index) in chat" :key="index" style="text-overflow: clip;"
                     :class="['d-flex flex-row align-center my-2', isMessageFromUser(item.from) ? 'justify-end': null]">
