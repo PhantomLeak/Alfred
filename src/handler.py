@@ -84,6 +84,9 @@ def logic(response: str = ''):
             return_response += '</span>'
 
             return return_response
+        
+        elif response == 'thank you':
+            return "It's my pleasure! Let me know if there's anything else I can do for you."
 
         else:
             return "I'm sorry, I don't quite understand, can you try again?"
