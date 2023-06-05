@@ -95,12 +95,56 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+
+      <!-- Password details modal -->
+      <v-dialog
+        v-model="displayPasswordModal"
+        >
+        <v-card>
+          <v-card-title>
+            Password Details
+          </v-card-title>
+          <v-card-text class="mt-5">
+            <v-row>
+              <v-col cols="5">
+                <v-slider
+                  v-model="passwordObj.passlen"
+                  track-color="primary"
+                  thumb-label="always"
+                  label="Password Length" />
+              </v-col>
+              <v-col cols="5" class="mt-n8">
+                <v-select
+                  v-model="passwordObj.selectedPasswordType"
+                  :items="passwordTypeOptions"
+                  label="password type"
+                  item-value="code"
+                  item-text="name" />
+              </v-col>
+              <v-col cols="2" class="mt-n8">
+                <v-checkbox
+                    v-model="passwordObj.useSpecialCharacters"
+                    label="Use Special Characters"/>
+              </v-col>
+            </v-row>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              @click="savePasswordDetails"
+              small
+              color="primary"
+              >Generate Password</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </template>
   
   <script>
   import axios from 'axios';
-  
+  import passwordMixin from '@/mixins/password'
+
   const PATH = 'http://localhost:5000/'
   const PAGE_STORAGE_KEY = 'alfred'
   export default {
@@ -119,33 +163,45 @@
           'tell me another',
           'again'
         ],
+        operation: 'standard_msg',
         changeUserNameModal: false,
         userNameModalView: 'nameChange',
+
+        displayPasswordModal: false,
+        passwordObj: {...this.newPasswordObj}
       };
     },
+    mixins: [passwordMixin],
     components: {
     },
     methods: {
       submitCommand() {
         this.loading = true
         this.writeUserRequest()
-        if (this.performSameActionIndicators.includes(this.msg)) {
-          this.msg = this.prevRequest
-        } else {
-          this.prevRequest = this.msg
-        }
+        this.getOperationType()
 
-        let payload = {
-          'request_msg': this.msg
-        }
-        axios.post(PATH, payload).then((ret) => {
-          if (ret.data) {
-            this.msg = null
-            this.addReply(ret.data.return_msg)
+        if (!this.messageNeedsMoreDetail()) {
+          if (this.performSameActionIndicators.includes(this.msg)) {
+            this.msg = this.prevRequest
+          } else {
+            this.prevRequest = this.msg
+          }
+          let requestPayload = {
+            operation: this.operation,
+            payload: {
+              'request_msg': this.msg
+            }
           }
 
-          this.loading = false
-        })
+          axios.post(PATH, requestPayload).then((ret) => {
+            if (ret.data) {
+              this.msg = null
+              this.addReply(ret.data.return_msg)
+            }
+            this.operation = 'standard_msg'
+            this.loading = false
+          })
+        }
       },
       async getGreeting() {
         axios.get(PATH).then((ret) => {
@@ -198,8 +254,37 @@
             displayColor: this.displayColor
           }
         }
-
         localStorage.setItem(PAGE_STORAGE_KEY, JSON.stringify(settings))
+      },
+      messageNeedsMoreDetail() {
+        let msg = JSON.parse(JSON.stringify(this.msg))
+        let moreDetailNeeded = false
+
+        if (msg.toLowerCase().split(" ").includes("password")) {
+          if (!this.hasPasswordDetails) {
+            moreDetailNeeded = true
+            this.loading = false
+            this.getPasswordDetails()
+          }
+        }
+
+        return moreDetailNeeded
+      },
+      getPasswordDetails() {
+        this.passwordObj = this.prepPasswordObject(this.msg)
+        this.displayPasswordModal = true
+      },
+      savePasswordDetails() {
+        this.hasPasswordDetails = true
+        this.displayPasswordModal = false
+        this.clearPasswordData()
+        this.submitCommand()
+      },
+      getOperationType() {
+        let msg = JSON.parse(JSON.stringify(this.msg))
+        if (msg.toLowerCase().split(" ").includes("password")) {
+          this.operation = 'password'
+        }
       }
     },
     created() {},

@@ -15,8 +15,10 @@ alfredGames = Games()
 
 
 # Completes the logic for Alfred
-def logic(response: str = ''):
-    response = response.lower().strip()
+def logic(response: dict = {}):
+    # response = response.lower().strip()
+    operation = response.get('operation')
+    print(operation)
     try:
         ## -- NEED TO REWRITE THE GAME HANDLER AND FUNCTIONS -- ##
 
