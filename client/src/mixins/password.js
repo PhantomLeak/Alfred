@@ -25,9 +25,9 @@ export default {
             if (this.passwordContainsLen(password)) {
                 this.newPasswordObj.passLen = this.extractPasswordLen(password)
             }
-            return this.newPasswordObj
         },
         clearPasswordData() {
+            this.hasPasswordDetails = false
             this.newPasswordObj = {
                 'passlen': 16,
                 'useSpecialCharacters': true,

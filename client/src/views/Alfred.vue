@@ -108,14 +108,14 @@
             <v-row>
               <v-col cols="5">
                 <v-slider
-                  v-model="passwordObj.passlen"
+                  v-model="newPasswordObj.passlen"
                   track-color="primary"
                   thumb-label="always"
                   label="Password Length" />
               </v-col>
               <v-col cols="5" class="mt-n8">
                 <v-select
-                  v-model="passwordObj.selectedPasswordType"
+                  v-model="newPasswordObj.selectedPasswordType"
                   :items="passwordTypeOptions"
                   label="password type"
                   item-value="code"
@@ -123,7 +123,7 @@
               </v-col>
               <v-col cols="2" class="mt-n8">
                 <v-checkbox
-                    v-model="passwordObj.useSpecialCharacters"
+                    v-model="newPasswordObj.useSpecialCharacters"
                     label="Use Special Characters"/>
               </v-col>
             </v-row>
@@ -144,6 +144,7 @@
   <script>
   import axios from 'axios';
   import passwordMixin from '@/mixins/password'
+  import submitCommandMixin from "@/mixins/submitCommand";
 
   const PATH = 'http://localhost:5000/'
   const PAGE_STORAGE_KEY = 'alfred'
@@ -168,17 +169,16 @@
         userNameModalView: 'nameChange',
 
         displayPasswordModal: false,
-        passwordObj: {...this.newPasswordObj}
       };
     },
-    mixins: [passwordMixin],
+    mixins: [passwordMixin, submitCommandMixin],
     components: {
     },
     methods: {
       submitCommand() {
         this.loading = true
         this.writeUserRequest()
-        this.getOperationType()
+        this.operation = this.getOperationType(this.msg)
 
         if (!this.messageNeedsMoreDetail()) {
           if (this.performSameActionIndicators.includes(this.msg)) {
@@ -186,11 +186,10 @@
           } else {
             this.prevRequest = this.msg
           }
+
           let requestPayload = {
             operation: this.operation,
-            payload: {
-              'request_msg': this.msg
-            }
+            payload: this.prepPayload(this.operation, this.msg)
           }
 
           axios.post(PATH, requestPayload).then((ret) => {
@@ -271,21 +270,15 @@
         return moreDetailNeeded
       },
       getPasswordDetails() {
-        this.passwordObj = this.prepPasswordObject(this.msg)
+        this.prepPasswordObject()
         this.displayPasswordModal = true
       },
-      savePasswordDetails() {
+      async savePasswordDetails() {
         this.hasPasswordDetails = true
         this.displayPasswordModal = false
+        await this.submitCommand()
         this.clearPasswordData()
-        this.submitCommand()
       },
-      getOperationType() {
-        let msg = JSON.parse(JSON.stringify(this.msg))
-        if (msg.toLowerCase().split(" ").includes("password")) {
-          this.operation = 'password'
-        }
-      }
     },
     created() {},
     async mounted() {

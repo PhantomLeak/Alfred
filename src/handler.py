@@ -16,79 +16,56 @@ alfredGames = Games()
 
 # Completes the logic for Alfred
 def logic(response: dict = {}):
-    # response = response.lower().strip()
     operation = response.get('operation')
-    print(operation)
+    payload = response.get('payload')
     try:
-        ## -- NEED TO REWRITE THE GAME HANDLER AND FUNCTIONS -- ##
 
-        # if 'game' in response:
-        #     if 'snake' in response:
-        #         alfredGames.gameDecision('snake_game')
-
-        #     return 'loading...'
-        # if response in tbo.game_initiators:
-        #     game_choice = input(tc.prompt_message(
-        #         f"Which game would you like to play? ({tc.prompt_message_choices(1, 'Rock Paper Scissors,')}, {tc.prompt_message_choices(2, 'Guessing Game,')}, {tc.prompt_message_choices(3, 'Sudoku,')} {tc.prompt_message_choices(4, 'Snake Game,')} {tc.prompt_message_choices(5, 'Quit):')}"))
-        #     print("")
-        #     if game_choice == '1' or 'rock' in game_choice or 'paper' in game_choice or 'scissors' in game_choice:
-        #         alfredGames.gameDecision('rock_paper_scissors')
-        #     elif game_choice == '2' or 'guessing' in game_choice:
-        #         alfredGames.gameDecision('guessing_game')
-        #     elif game_choice == '3' or 'sudoku' in game_choice:
-        #         alfredGames.gameDecision('sudoku')
-        #     elif game_choice == '4' or 'snake' in game_choice:
-        #         alfredGames.gameDecision('snake_game')
-        #     else:
-        #         print(tc.output_message('GoodBye, come play again!'))
-        #         af.alfred_main(1)
-
-        if 'password' in response:
-            new_password = password.create_password(password_init=response)
+        if operation.lower() == 'generate_password':
+            new_password = password.create_password(password_obj=payload)
 
             return new_password
 
-        elif 'weather' in response.lower():
-            forecast = weather.weather(response)
-            return forecast
-
-        elif ('+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response
-              or 'squared' in response or 'power of' in response):
-            calc = calculator.string_num_seperator(response)
-            return f'The answer is: {str(calc)}'
-
-        elif response in tbo.joke_initiators:
-            joke = aj.jokes()
-            return joke
-
-        elif 'open' in response or 'search for' in response:
-            success = web_search.search_web(response)
-
-            return success
-        
-        elif ("todays date" in response or "today's date" in response or "current date" in response 
-              or "current time" in response or "time right now" in response):
-            date_time = cur_date_time.get_date_time(response=response)
-
-            return date_time
+        if operation.lower() == 'get_weather':
+            weather_request = payload.get('weather_request')
+            return weather.weather(weather_init=weather_request)
+        #
+        # elif ('+' in response or '-' in response or '/' in response or '*' in response or 'square root' in response
+        #       or 'squared' in response or 'power of' in response):
+        #     calc = calculator.string_num_seperator(response)
+        #     return f'The answer is: {str(calc)}'
+        #
+        # elif response in tbo.joke_initiators:
+        #     joke = aj.jokes()
+        #     return joke
+        #
+        # elif 'open' in response or 'search for' in response:
+        #     success = web_search.search_web(response)
+        #
+        #     return success
+        #
+        # elif ("todays date" in response or "today's date" in response or "current date" in response
+        #       or "current time" in response or "time right now" in response):
+        #     date_time = cur_date_time.get_date_time(response=response)
+        #
+        #     return date_time
 
         # elif 'set a reminder' in response or 'remind me' in response:
         #     reminders.set_reminder(response)
         #     return 'Reminder Set'
 
-        elif response == 'help' or response == 'what can you do?' or response == 'what can you do':
-            return_response = '<span>'
-            return_response += 'Here are some things I can help you with: <br/>'
-
-            for idx, commands in enumerate(tbo.help_options):
-                return_response += f'<span class="ml-4">{idx + 1}. {commands}</span> <br/>'
-            
-            return_response += '</span>'
-
-            return return_response
-        
-        elif response == 'thank you':
-            return "It's my pleasure! Let me know if there's anything else I can do for you."
+        # elif response == 'help' or response == 'what can you do?' or response == 'what can you do':
+        #     return_response = '<span>'
+        #     return_response += 'Here are some things I can help you with: <br/>'
+        #
+        #     for idx, commands in enumerate(tbo.help_options):
+        #         return_response += f'<span class="ml-4">{idx + 1}. {commands}</span> <br/>'
+        #
+        #     return_response += '</span>'
+        #
+        #     return return_response
+        #
+        # elif response == 'thank you':
+        #     return "It's my pleasure! Let me know if there's anything else I can do for you."
 
         else:
             return "I'm sorry, I don't quite understand, can you try again?"
