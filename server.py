@@ -3,7 +3,7 @@ from flask_socketio import SocketIO
 from flask_cors import CORS
 from src.handler import logic
 from src.functions.greeting import greeting
-from src.functions.imitari import reformat_image
+# from src.functions.imitari import reformat_image
 import logging
 
 # Config

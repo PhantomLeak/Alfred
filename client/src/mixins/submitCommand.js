@@ -9,18 +9,16 @@ export default {
         getOperationType(msg) {
             if (msg.toLowerCase().split(" ").includes("password")) {
                 return 'generate_password'
-            }
-            if (msg.toLowerCase().split(" ").includes("weather")) {
-                return 'get_weather'
+            } else {
+                return null
             }
         },
         prepPayload(operation, msg = null) {
             if (operation === 'generate_password') {
                 return this.newPasswordObj
-            }
-            if (operation === 'get_weather') {
+            } else {
                 return {
-                    'weather_request': msg
+                    msg: msg
                 }
             }
         }

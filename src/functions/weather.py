@@ -4,7 +4,6 @@ from time import sleep
 
 import requests
 from geopy.geocoders import Nominatim
-from tqdm import trange
 
 from src.api_keys import OPEN_WEATHER_API_KEY
 

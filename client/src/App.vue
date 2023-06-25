@@ -1,8 +1,9 @@
 <template>
-  <v-app>
+  <v-app class="appBody">
     <v-app-bar
       app
       class="topToolBar"
+      elevation="2"
     >
       <v-img
         alt="Alfred"
@@ -10,25 +11,28 @@
         contain
         min-width="50"
         @click="routeChange('')"
-        src="../public/butler-black.png"
+        src="../public/butler-silhouette.png"
         width="50"/>
 
       <v-spacer />
 
       <v-badge
-        pill
-        overlap
-        floating
-        left
-        content="Alpha"
-        color="red"
-        >
+          pill
+          overlap
+          floating
+          left
+          content="Coming Soon"
+          color="red"
+      >
         <v-btn
-        small
-        icon
-        title="Resize / Format Images"
-        @click="routeChange('imitari')"
-        ><v-icon small color="white">fa-solid fa-image</v-icon></v-btn>
+            disabled
+            icon small
+            color="white"
+            title="Resize / Format Images"
+            @click="routeChange('imitari')"
+        >
+          <v-icon small color="white">fa-solid fa-image</v-icon>
+        </v-btn>
       </v-badge>
 
       <!-- Future project to enable reminders -->
