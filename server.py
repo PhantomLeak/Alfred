@@ -1,8 +1,9 @@
 from flask import Flask, request, render_template, jsonify, send_file
+from flask_socketio import SocketIO
 from flask_cors import CORS
 from src.handler import logic
 from src.functions.greeting import greeting
-from src.functions.imitari import reformat_image
+# from src.functions.imitari import reformat_image
 import logging
 
 # Config
@@ -10,6 +11,8 @@ DEBUG = True
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 
 # enable CORS
 CORS(app, resources={f'/*': {'origins': '*'}})
@@ -23,8 +26,8 @@ def alfred():
     if request.method == 'POST':
         try:
             post_data = request.get_json()
-            request_msg = post_data.get('request_msg')
-            return_response = logic(response=request_msg)
+            # request_msg = post_data.get('request_msg')
+            return_response = logic(response=post_data)
             response_obj = {'response': 200, 'return_msg': return_response}
         except Exception as e:
             logging.exception(e)
@@ -40,32 +43,38 @@ def alfred():
 
     return jsonify(response_obj)
 
-@app.route('/imitari', methods=['POST'])
-def imitari():
-    response_obj = {}
-    try:
-        post_data = request.get_json()
-        image = post_data.get('image')
-        height = post_data.get('height', 500)
-        width = post_data.get('width', 500)
-        format_type = post_data.get('fileType', 'PNG')
 
-        if not image:
-            return jsonify({'response': 404})
+# @app.route('/imitari', methods=['POST'])
+# def imitari():
+#     response_obj = {}
+#     try:
+#         post_data = request.get_json()
+#         image = post_data.get('image')
+#         height = post_data.get('height', 500)
+#         width = post_data.get('width', 500)
+#         format_type = post_data.get('fileType', 'PNG')
+#
+#         if not image:
+#             return jsonify({'response': 404})
+#
+#         new_image = reformat_image(image=image, width=int(width), height=int(height), format_type=format_type)
+#
+#         response_obj = {'response': 200, 'image': new_image}
+#         return jsonify(response_obj)
+#
+#     except Exception as e:
+#         logging.exception(e)
+#         response_obj = {'response': 404}
+#         return jsonify(response_obj)
 
-        new_image = reformat_image(image=image, width=int(width), height=int(height), format_type=format_type)
 
-        response_obj = {'response': 200, 'image': new_image}
-        return jsonify(response_obj)
-
-    except Exception as e:
-        logging.exception(e)
-        response_obj = {'response': 404}
-        return jsonify(response_obj)
+@socketio.on('message')
+def handle_message(data):
+    print('cool cool cool')
 
 
 if __name__ == '__main__':
-    app.run()
+    socketio.run(app)
 
 ### LIST OF TASKS TO BE COMPLETED
 # TODO: Allow Alfred to do speech to text recognition so I can speak to him rather than typing (Kinda like Iron man and Jarvis)

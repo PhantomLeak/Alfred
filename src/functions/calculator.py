@@ -15,8 +15,7 @@ def string_num_seperator(string):
         if 'power of' in string:
             return int(nums[0]) ** int(nums[1])
         else:
-            calculations = re.findall('[\d\(\)\+\-\*\/\.]',
-                                      string)  # Regex function to find numbers and operators for calculations
+            calculations = re.findall('[\d\(\)\+\-\*\/\.]', string)  # Regex function to find numbers and operators for calculations
     except Exception as e:
         logging.exception(e)
 
