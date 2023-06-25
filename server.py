@@ -44,28 +44,28 @@ def alfred():
     return jsonify(response_obj)
 
 
-@app.route('/imitari', methods=['POST'])
-def imitari():
-    response_obj = {}
-    try:
-        post_data = request.get_json()
-        image = post_data.get('image')
-        height = post_data.get('height', 500)
-        width = post_data.get('width', 500)
-        format_type = post_data.get('fileType', 'PNG')
-
-        if not image:
-            return jsonify({'response': 404})
-
-        new_image = reformat_image(image=image, width=int(width), height=int(height), format_type=format_type)
-
-        response_obj = {'response': 200, 'image': new_image}
-        return jsonify(response_obj)
-
-    except Exception as e:
-        logging.exception(e)
-        response_obj = {'response': 404}
-        return jsonify(response_obj)
+# @app.route('/imitari', methods=['POST'])
+# def imitari():
+#     response_obj = {}
+#     try:
+#         post_data = request.get_json()
+#         image = post_data.get('image')
+#         height = post_data.get('height', 500)
+#         width = post_data.get('width', 500)
+#         format_type = post_data.get('fileType', 'PNG')
+#
+#         if not image:
+#             return jsonify({'response': 404})
+#
+#         new_image = reformat_image(image=image, width=int(width), height=int(height), format_type=format_type)
+#
+#         response_obj = {'response': 200, 'image': new_image}
+#         return jsonify(response_obj)
+#
+#     except Exception as e:
+#         logging.exception(e)
+#         response_obj = {'response': 404}
+#         return jsonify(response_obj)
 
 
 @socketio.on('message')
