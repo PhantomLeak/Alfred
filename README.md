@@ -14,7 +14,7 @@ Chatbot / virtual assistant written in Vuejs & Python to help with every day nee
 ---
 
 ## Features
-- Ability to play limited games against computer or solo games like Snake and Sudoku
+- Ability to play limited games against computer or solo games like Snake and Sudoku (coming soon)
 - Ask for weather information
 - Generate passwords
 - Search the web
