@@ -9,6 +9,7 @@ from src.functions import web_search as web_search
 from src.functions.password_generator import Password as Password
 from src.functions.Games.alfred_games import Games
 from src.common_functions import decipher_operation
+
 # Class initialization
 password = Password()
 alfredGames = Games()
@@ -18,7 +19,7 @@ alfredGames = Games()
 def logic(response: dict = {}):
     operation = response.get('operation')
     payload = response.get('payload')
-    msg = payload.get('msg')
+    msg = payload.get('msg').lower()
     if not operation:
         operation = decipher_operation(msg)
     try:
@@ -60,7 +61,6 @@ def logic(response: dict = {}):
         # elif 'set a reminder' in response or 'remind me' in response:
         #     reminders.set_reminder(response)
         #     return 'Reminder Set'
-
 
         else:
             return "I'm sorry, I don't quite understand, can you try again?"

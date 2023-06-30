@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <v-card :loading="loading" height="90vh" class="d-flex flex-column mt-5" elevation-2>
+    <v-card :loading="loading" height="90vh" class="d-flex flex-column" elevation-2>
       <v-card-text style="overflow-y: auto; display: flex; flex-direction: column-reverse;">
         <v-container>
           <v-row align="end">
@@ -28,7 +28,8 @@
                         :color="displayColor" size="36" title="Change Display Name">
                 <span class="white--text">{{ userName[0] }}</span>
               </v-avatar>
-              <v-text-field v-model="msg" class="ml-3" placeholder="Type Something" @keypress.enter="submitCommand"/>
+              <v-text-field v-model="msg" class="ml-3" placeholder="Type Something" clearable
+                            @keypress.enter="submitCommand"/>
               <v-btn icon class="ml-4" @click="submitCommand" title="Send Message">
                 <v-icon>mdi-send</v-icon>
               </v-btn>
@@ -95,8 +96,7 @@
     <!-- Password details modal -->
     <v-dialog
         v-model="displayPasswordModal"
-        width="800"
-    >
+        width="800">
       <v-card>
         <v-card-title>
           Password Details
@@ -106,11 +106,19 @@
             <v-col cols="5">
               <v-slider
                   v-model="newPasswordObj.passlen"
+                  hide-details
                   track-color="primary"
                   thumb-label="always"
                   label="Password Length"/>
             </v-col>
-            <v-col cols="5" class="mt-n8">
+            <v-col cols="2" class="mt-n7">
+              <v-text-field
+                  type="number"
+                  v-model="newPasswordObj.passlen"
+                  hide-details
+              />
+            </v-col>
+            <v-col cols="5" class="mt-n7">
               <v-select
                   v-model="newPasswordObj.selectedPasswordType"
                   :items="passwordTypeOptions"
@@ -118,7 +126,9 @@
                   item-value="code"
                   item-text="name"/>
             </v-col>
-            <v-col cols="2" class="mt-n8">
+          </v-row>
+          <v-row>
+            <v-col cols="4" class="mt-n8">
               <v-checkbox
                   v-model="newPasswordObj.useSpecialCharacters"
                   label="Use Special Characters"/>
