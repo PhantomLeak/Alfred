@@ -12,7 +12,6 @@ Chatbot / virtual assistant written in Vuejs & Python to help with every day nee
 
 
 ## Features
-***
 - Ability to play limited games against computer or solo games like Snake and Sudoku (coming soon)
 - Provide weather information
 - Generate passwords
@@ -23,7 +22,6 @@ Chatbot / virtual assistant written in Vuejs & Python to help with every day nee
 - Performs mathematical calculations (addition, subtraction, multiplication, division, square root, and powers) 
 
 ## Tech Stack
-***
 - [Python](https://www.python.org/) - Back-end language
 - [Flask](https://flask.palletsprojects.com/en/2.3.x/) - Back-end framework
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/javascript) - Front-end language
@@ -32,7 +30,6 @@ Chatbot / virtual assistant written in Vuejs & Python to help with every day nee
 - [SCSS](https://sass-lang.com/documentation/syntax/) - Styling
 
 ## Getting Started
-***
 ### Prerequisites
 - Python (Version >= 3.10)
 - Node.js (version >= 18)
@@ -61,6 +58,5 @@ npm run serve
 ```
 
 ## 👨 Author(s)
-***
 **Dylan Stocking** ([@dylanstocking](https://www.linkedin.com/in/dylanstocking/))
 
