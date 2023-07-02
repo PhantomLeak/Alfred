@@ -57,6 +57,6 @@ cd client
 npm run serve
 ```
 
-## 👨 Author(s)
+## ![](https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/People.svg) Author(s)
 **Dylan Stocking** ([@dylanstocking](https://www.linkedin.com/in/dylanstocking/))
 
